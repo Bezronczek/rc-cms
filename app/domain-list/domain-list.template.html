@@ -1,7 +1,7 @@
 <div class="row">
   <div class="container-fluid">
     <ul class="list-group">
-      <li ng-repeat="domain in $ctrl.domains" href="#" class="list-group-item">
+      <li ng-click="$ctrl.setActiveDomain(domain.name)" ng-class="{'active': $ctrl.activeDomain == domain.name}" ng-repeat="domain in $ctrl.domains" href="#" class="list-group-item">
         {{domain.name}}
         <a ng-click="$ctrl.removeDomain(domain.name)"><span class="glyphicon glyphicon-remove pull-right"></span></a>
       </li>
