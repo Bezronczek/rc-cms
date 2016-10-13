@@ -6,3 +6,15 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.group-header {
+    display: inline;
+}
+
+.glyphicon.glyphicon-remove {
+    color: red;
+}
+
+.add-page-container {
+    margin-top: 15px;
+}

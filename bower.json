@@ -1,0 +1,11 @@
+{
+  "name": "rc-cms",
+  "description": "Simple CMS App",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.x",
+    "bootstrap": "3.3.x",
+    "angular-resource": "1.5.x"
+  }
+}

@@ -1,0 +1,50 @@
+<div ng-repeat="page in $ctrl.pages" class="container-fluid page">
+  <div class="col-lg-12">
+
+    <div class="row form-inline page-form">
+      <h1 class="page-header">Strona: {{page.action}}</h1>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="page.photo" ng-checked="page.photo"> Photo Page
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="show" ng-checked="page.show"> Show
+        </label>
+      </div>
+      <input type="text" class="form-control" placeholder="action" ng-model="page.action">
+      <button class="btn btn-success" ng-click="$ctrl.savePage()">Save</button>
+    </div>
+
+    <!--GROUP -->
+
+    <group-list ng-if="page.photo" groups="page.groups"></group-list>
+
+    <!--/ GROUP-->
+
+    <div ng-if="page.photo" class="row">
+      <form class="form-inline">
+        <select class="form-control" name="addGroup" id="">
+          <option class="form-control" value="">Existing group 1</option>
+          <option class="form-control" value="">Existing group 2</option>
+          <option value="">Create new group...</option>
+        </select>
+        <button class="btn btn-primary">Add group</button>
+      </form>
+    </div>
+
+    <div ng-if="!page.photo" class="row">
+      <textarea class="form-control" rows="10"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid add-page-container">
+  <div class="col-lg-12">
+    <div class="row">
+      <button class="btn btn-success" ng-click="$ctrl.addPage()">Add page</button>
+    </div>
+  </div>
+</div>
