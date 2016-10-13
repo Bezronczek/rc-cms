@@ -1,0 +1,19 @@
+{
+  "name": "rc-cms",
+  "private": true,
+  "version": "0.0.1",
+  "devDependencies": {
+    "bower": "*",
+    "jasmine-core": "*",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-firefox-launcher": "*",
+    "karma-jasmine": "*",
+    "protractor": "*"
+  },
+  "scripts": {
+    "test": "karma start karma.conf.js",
+    "pretest": "npm install",
+    "postinstall": "bower install"
+  }
+}

@@ -3,7 +3,7 @@ angular
   .component('domainList', {
     templateUrl: 'domain-list/domain-list.template.html',
     controller: ['Domain', '$scope',
-      function DomainsController(Domain, $scope) {
+      function DomainListController(Domain, $scope) {
       this.domains = Domain.list();
       this.addDomain = function (name) {
         Domain.add(name);
