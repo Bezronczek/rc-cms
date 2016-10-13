@@ -173,15 +173,5 @@ angular
       })
     };
 
-    this.addLanguage = function (page, group) {
-      const pageIndex = lodash.findIndex(this.pages, page);
-
-      let groupIndex = lodash.findIndex(this.pages[pageIndex].groups, group);
-      this.pages[pageIndex].groups[groupIndex].languages.push({
-        lang: "",
-        url: "",
-        title: ""
-      });
-    }
   }]
 });
