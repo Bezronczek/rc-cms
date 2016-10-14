@@ -9,7 +9,9 @@
     "karma-chrome-launcher": "*",
     "karma-firefox-launcher": "*",
     "karma-jasmine": "*",
-    "protractor": "*",
+    "protractor": "*"
+  },
+  "dependencies": {
     "http-server": "^0.9.0"
   },
   "scripts": {
