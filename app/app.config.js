@@ -4,8 +4,8 @@ angular.module('cms')
       {
         name: 'domains',
         url: '/',
-        template: "<domain-list domains='$resolve.domains'></domain-list>",
-        // component: 'domain-list',
+        // template: "<domain-list domains='$resolve.domains'></domain-list>",
+        component: 'domainList',
         resolve: {
           domains: function(Domain) {
             return Domain.list()
@@ -15,17 +15,13 @@ angular.module('cms')
       {
         name: 'domains.pages',
         url: '{domainName}',
-        template: '<page-list pages="$resolve.pages"></page-list>',
-        // component: 'page-list',
+        // template: '<page-list pages="$resolve.pages"></page-list>',
+        component: 'pageList',
         resolve: {
           pages: function(Domain, $stateParams) {
             return Domain.loadPages($stateParams.domainName);
           }
         }
-      }, {
-        name: "domains.pages.groups",
-        url: '{groupName}',
-        template: '<group-list></group-list>'
       }
     ];
 
