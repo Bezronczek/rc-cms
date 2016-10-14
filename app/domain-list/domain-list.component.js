@@ -5,10 +5,13 @@ angular
       domains: "="
     },
     templateUrl: 'domain-list/domain-list.template.html',
-    controller: ['Domain', '$scope',
-      function DomainListController(Domain, $scope) {
+    controller: ['Domain', '$scope', '$stateParams',
+      function DomainListController(Domain, $scope, $stateParams) {
 
-        this.activeDomain = this.domains[0].name;
+        $scope.$on('$viewContentLoaded', function (event) {
+          this.domainDetails = Domain.getDomainDetails($stateParams.domainName);
+          console.log(this.domainDetails);
+        });
 
         this.addDomain = function (name) {
           Domain.add(name);

@@ -3,5 +3,6 @@ angular.module('cms', [
   'pageList',
   'groupList',
   'photosList',
+  'domainDetails',
   'ui.router'
 ]);

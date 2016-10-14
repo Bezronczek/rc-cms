@@ -18,3 +18,7 @@
 .add-page-container {
     margin-top: 15px;
 }
+
+li.list-group-item.active > a {
+    color: #fff;
+}
