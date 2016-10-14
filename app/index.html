@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="cms">
+<html>
 <head>
   <meta charset="utf-8">
   <title>CMS</title>
@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/ng-lodash/build/ng-lodash.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
   <script src="app.module.js"></script>
+  <script src="app.config.js"></script>
   <script src="core/core.module.js"></script>
   <script src="core/domain/domain.module.js"></script>
   <script src="core/domain/domain.service.js"></script>
@@ -28,23 +30,20 @@
 
 
 </head>
-<body>
+<body ng-app="cms">
 <!--App Container-->
 <div class="container-fluid layout">
-  <div class="row">
+  <!--<div class="row" ui-view>-->
     <!--Domains -->
-    <div class="col-lg-2">
-      <domain-list></domain-list>
-    </div>
+    <!--<div class="col-lg-2">-->
+      <!--<domain-list></domain-list>-->
+  <ui-view></ui-view>
+    <!--</div>-->
     <!--/ Domains -->
 
     <!--Pages And Groups -->
 
-    <div class="col-lg-10">
 
-      <page-list></page-list>
-      <!--/ Pages And Groups-->
-    </div>
 
   </div>
   <!--/ App Container-->

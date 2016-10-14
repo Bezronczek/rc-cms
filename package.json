@@ -9,11 +9,14 @@
     "karma-chrome-launcher": "*",
     "karma-firefox-launcher": "*",
     "karma-jasmine": "*",
-    "protractor": "*"
+    "protractor": "*",
+    "http-server": "^0.9.0"
   },
   "scripts": {
     "test": "karma start karma.conf.js",
     "pretest": "npm install",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server ./app -a localhost -p 3000 -c-1"
   }
 }

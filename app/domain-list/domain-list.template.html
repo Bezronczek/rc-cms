@@ -1,22 +1,30 @@
-<div class="row">
-  <div class="container-fluid">
-    <ul class="list-group">
-      <li ng-click="$ctrl.setActiveDomain(domain.name)" ng-class="{'active': $ctrl.activeDomain == domain.name}" ng-repeat="domain in $ctrl.domains" href="#" class="list-group-item">
-        {{domain.name}}
-        <a ng-click="$ctrl.removeDomain(domain.name)"><span class="glyphicon glyphicon-remove pull-right"></span></a>
-      </li>
-    </ul>
+<div class="col-lg-2">
+  <div class="row">
+    <div class="container-fluid">
+      <ul class="list-group">
+        <!--<li ng-click="$ctrl.setActiveDomain(domain.name)" ng-class="{'active': $ctrl.activeDomain == domain.name}" ng-repeat="domain in $ctrl.domains" href="#" class="list-group-item">-->
+          <!--{{domain.name}}-->
+          <!--<a ng-click="$ctrl.removeDomain(domain.name)"><span class="glyphicon glyphicon-remove pull-right"></span></a>-->
+        <!--</li>-->
+        <li ng-repeat="domain in $ctrl.domains" class="list-group-item">
+          <a href="" ui-sref-active="active" ui-sref="domains.pages({domainName: domain.name})" >{{domain.name}}</a>
+        </li>
+      </ul>
 
-    <div class="input-group">
+      <div class="input-group">
       <span class="input-group-btn">
         <button class="btn btn-primary" ng-click="$ctrl.addDomain(domainName)">Dodaj</button>
       </span>
-      <input type="text" class="form-control" placeholder="Nowa domena" ng-model="domainName">
+        <input type="text" class="form-control" placeholder="Nowa domena" ng-model="domainName">
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
+<div class="col-lg-10">
 
-
-
+  <!--<page-list></page-list>-->
+  <ui-view></ui-view>
+  <!--/ Pages And Groups-->
+</div>

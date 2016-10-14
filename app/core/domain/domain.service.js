@@ -171,6 +171,8 @@ angular
     }
   ];
 
+  let activeDomain = domains[0].name;
+
   return {
     list() {
       return domains;
@@ -186,7 +188,8 @@ angular
 
     add(name) {
       domains.push({
-        name: name
+        name: name,
+        pages: []
       })
     },
 
@@ -195,6 +198,14 @@ angular
       lodash.remove(domains, {
         name: name
       })
+    },
+
+    setActiveDomain(name) {
+      activeDomain = name;
+    },
+
+    getActiveDomain() {
+      return activeDomain;
     }
   }
 }]);

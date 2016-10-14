@@ -19,9 +19,13 @@
 
     <!--GROUP -->
 
+    <!--<ui-view ng-if="page.photo"></ui-view>-->
+
     <group-list ng-if="page.photo" groups="page.groups"></group-list>
 
     <!--/ GROUP-->
+
+    <!--GROUP FOOTER-->
 
     <div ng-if="page.photo" class="row">
       <form class="form-inline">
@@ -33,6 +37,8 @@
         <button class="btn btn-primary">Add group</button>
       </form>
     </div>
+
+    <!--/ GROUP FOOTER-->
 
     <div ng-if="!page.photo" class="row">
       <textarea class="form-control" rows="10"></textarea>
