@@ -1,19 +1,21 @@
 angular
-  .module('domainList')
-  .component('domainList', {
+  .module('domainView')
+  .component('domainView', {
     bindings: {
       domains: "="
     },
-    templateUrl: 'domain-list/domain-list.template.html',
+    templateUrl: 'domain-view/domain-view.template.html',
     controller: ['Domain', '$scope', '$stateParams',
       function DomainListController(Domain, $scope, $stateParams) {
 
+        console.log(Domain.list());
+
         $scope.$on('$viewContentLoaded', function (event) {
           this.domainDetails = Domain.getDomainDetails($stateParams.domainName);
-          console.log(this.domainDetails);
         });
 
         this.addDomain = function (name) {
+          if(!name) return;
           Domain.add(name);
           $scope.domainName = null;
         };

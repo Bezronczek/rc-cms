@@ -1,1 +1,1 @@
-angular.module('core', ['core.domain']);
+angular.module('core', ['core.domain', 'core.page']);

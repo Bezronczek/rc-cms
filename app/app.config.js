@@ -6,7 +6,7 @@ angular.module('cms')
           name: 'domains',
           url: '/',
           // template: "<domain-list domains='$resolve.domains'></domain-list>",
-          component: 'domainList',
+          component: 'domainView',
           resolve: {
             domains: function (Domain) {
               return Domain.list()
@@ -25,16 +25,13 @@ angular.module('cms')
           },
           url: '{domainName}',
           resolve: {
-            pages: function (Domain, $stateParams) {
-              console.log($stateParams.domainName);
-              return Domain.loadPages($stateParams.domainName);
+            pages: function (Page, $stateParams) {
+              return Page.listByDomainName($stateParams.domainName);
             },
-            data: function (Domain, $stateParams) {
+            domainDetails: function (Domain, $stateParams) {
               return Domain.getDomainDetails($stateParams.domainName);
             }
           }
-          // template: '<page-list pages="$resolve.pages"></page-list>',
-
         }
       ];
 

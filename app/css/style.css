@@ -5,10 +5,11 @@
 .group {
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .group-header {
-    display: inline;
+    display: block;
 }
 
 .glyphicon.glyphicon-remove {
@@ -21,4 +22,12 @@
 
 li.list-group-item.active > a {
     color: #fff;
+}
+
+.input-auto-width {
+    width: auto;
+}
+
+.top15 {
+    margin-top: 15px;
 }

@@ -2,12 +2,15 @@ angular
 .module('domainDetails')
 .component('domainDetails', {
   bindings: {
-    data: "="
+    domainDetails: "="
   },
   templateUrl: 'domain-details/domain-details.template.html',
-  contoller: ['Domain',
+  controller: ['Domain',
     function(Domain) {
-
+      this.debugData = function() {
+        console.log('click');
+        Domain.toLog()
+      }
     }
   ]
 });

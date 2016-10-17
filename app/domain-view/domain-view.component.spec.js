@@ -1,17 +1,17 @@
-describe('domainList', function () {
+describe('domainView', function () {
 
   beforeEach(module('cms'));
 
   describe('DomainListController', function () {
     it('should create `domains` model with 3 domains', inject(function ($componentController, Domain) {
 
-      var ctrl = $componentController('domainList', {}, {domains: Domain.list()});
+      var ctrl = $componentController('domainView', {}, {domains: Domain.list()});
 
       expect(ctrl.domains.length).toBe(3);
     }));
 
     it('should add new `test` domain', inject(function ($componentController, Domain) {
-      var ctrl = $componentController('domainList', {}, {domains: Domain.list()});
+      var ctrl = $componentController('domainView', {}, {domains: Domain.list()});
       var domainName = "test";
 
       ctrl.addDomain(domainName);
@@ -20,7 +20,7 @@ describe('domainList', function () {
     }));
 
     it('should remove `test` domain from domains list', inject(function ($componentController, Domain) {
-      var ctrl = $componentController('domainList', {}, {domains: Domain.list()});
+      var ctrl = $componentController('domainView', {}, {domains: Domain.list()});
       var domainName = "test";
 
       ctrl.removeDomain(domainName);

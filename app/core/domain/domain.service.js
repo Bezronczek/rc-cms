@@ -1,204 +1,45 @@
 angular
 .module('core.domain')
-.factory('Domain', ['lodash', function(lodash) {
+.factory('Domain', ['lodash', 'x2js', function(lodash, x2js) {
 
-  const domains = [
-    {
-      name: "firstone",
-      pages: [
-        {
-          action: "razem",
-          photo: true,
-          show: true,
-          groups: [
-            {
-              name: "jesien",
-              position: "gorny",
-              languages: [
-                {
-                  lang: "pl",
-                  url: "portrety",
-                  title: "Portrety"
-                },
-                {
-                  lang: "en",
-                  url: "portraits",
-                  title: "Portraits"
-                }
-              ],
-              photos: [
-                {
-                  id: 433,
-                  languages: [
-                    {
-                      lang: "pl",
-                      title: "Wojtek"
-                    },
-                    {
-                      lang: "en",
-                      title: "Wojtek"
-                    }
-                  ],
-                  data: {
-                    id: 433,
-                    subdomain: "s3.",
-                    gallery_height: 277,
-                    gallery_width: 277,
-                    gallery_top: 2,
-                    gallery_right: 35,
-                    files: [
-                      {
-                        name: "max",
-                        path: "/photos/max/433.jpg",
-                        width: 796,
-                        height:1024
-                      },
-                      {
-                        name: "min",
-                        path: "photos/min/433.jpg",
-                        width: 255,
-                        height: 290
-                      },
-                      {
-                        name: "preview",
-                        path: "/photos/preview/433.jpg",
-                        width: 69,
-                        height: 90
-                      }
-                    ]
-                  }
-                },
-                {
-                  id: 433,
-                  languages: [
-                    {
-                      lang: "pl",
-                      title: "Wojtek"
-                    },
-                    {
-                      lang: "en",
-                      title: "Wojtek"
-                    }
-                  ],
-                  data: {
-                    id: 433,
-                    subdomain: "s3.",
-                    gallery_height: 277,
-                    gallery_width: 277,
-                    gallery_top: 2,
-                    gallery_right: 35,
-                    files: [
-                      {
-                        name: "max",
-                        path: "/photos/max/433.jpg",
-                        width: 796,
-                        height:1024
-                      },
-                      {
-                        name: "min",
-                        path: "photos/min/433.jpg",
-                        width: 255,
-                        height: 290
-                      },
-                      {
-                        name: "preview",
-                        path: "/photos/preview/433.jpg",
-                        width: 69,
-                        height: 90
-                      }
-                    ]
-                  }
-                },
-                {
-                  id: 433,
-                  languages: [
-                    {
-                      lang: "pl",
-                      title: "Wojtek"
-                    },
-                    {
-                      lang: "en",
-                      title: "Wojtek"
-                    }
-                  ],
-                  data: {
-                    id: 433,
-                    subdomain: "s3.",
-                    gallery_height: 277,
-                    gallery_width: 277,
-                    gallery_top: 2,
-                    gallery_right: 35,
-                    files: [
-                      {
-                        name: "max",
-                        path: "/photos/max/433.jpg",
-                        width: 796,
-                        height:1024
-                      },
-                      {
-                        name: "min",
-                        path: "photos/min/433.jpg",
-                        width: 255,
-                        height: 290
-                      },
-                      {
-                        name: "preview",
-                        path: "/photos/preview/433.jpg",
-                        width: 69,
-                        height: 90
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        // {
-        //   action: "o-mnie",
-        //   photo: true,
-        //   show: false
-        // }
-      ]
-    },
-    {
-      name: "someother",
-      pages: []
-    },
-    {
-      name: "unpublished",
-      pages: []
-    }
-  ];
+  const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+<domains>
+	<domain name="testone" show="yes" url="cetra.com" redirect="http://cetra.info" />
+	<domain name="firstone" show="yes" url="cetra.info" redirect="asd" />
+	<domain name="soltone" show="yes" url="solofobia.cetra.info" redirect="asd" />
+	<domain name="projectone" show="yes" url="solofobia.pl" redirect="asd" />
+</domains>`;
+
+  // Obiekty domen umieszczone sa w tablicy domainObj.domains.domain
+  const domainsObj = x2js.xml_str2json(xmlString);
+
+  console.log('Domains:', domainsObj);
 
   return {
     list() {
-      return domains;
-    },
-
-    loadPages(name) {
-      const domainIndex = lodash.findIndex(domains, {
-        name: name
-      });
-
-      return domains[domainIndex].pages;
+      return domainsObj.domains.domain;
     },
 
     add(name) {
-      domains.push({
+      domainsObj.push({
         name: name,
         pages: []
       })
     },
 
     remove(name) {
-      lodash.remove(domains, {
+      lodash.remove(domainsObj, {
         name: name
       })
     },
 
     getDomainDetails(name) {
-      return lodash.find(domains, {name: name});
+      return lodash.find(domainsObj.domains.domain, {_name: name});
+    },
+    toLog() {
+      console.log('click2');
+      console.log(domainsObj);
     }
+
   }
 }]);

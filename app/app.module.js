@@ -1,5 +1,6 @@
 angular.module('cms', [
-  'domainList',
+  'core',
+  'domainView',
   'pageList',
   'groupList',
   'photosList',

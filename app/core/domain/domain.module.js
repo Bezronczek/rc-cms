@@ -1,3 +1,4 @@
 angular.module('core.domain', [
-  'ngLodash'
+  'ngLodash',
+  'cb.x2js'
 ]);

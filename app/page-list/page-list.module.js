@@ -1,4 +1,5 @@
 angular.module('pageList', [
   'ngLodash',
-  'core.domain'
+  'core.domain',
+  'core.page'
 ]);

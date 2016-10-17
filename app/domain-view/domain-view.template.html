@@ -10,8 +10,8 @@
           <!--<a href="#" ui-sref="domains.pages({domainName: domain.name})" >{{domain.name}}</a>-->
         <!--</li>-->
 
-        <a href="#" ui-sref="domains.pages({domainName: domain.name})" ui-sref-active="active" ng-repeat="domain in $ctrl.domains" class="list-group-item">
-          {{domain.name}}
+        <a href="#" ui-sref="domains.pages({domainName: domain._name})" ui-sref-active="active" ng-repeat="domain in $ctrl.domains" class="list-group-item">
+          {{domain._name}}
         </a>
 
       </div>

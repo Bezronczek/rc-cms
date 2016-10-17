@@ -1,1 +1,0 @@
-angular.module('domainList', ['core.domain']);

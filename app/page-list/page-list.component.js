@@ -5,178 +5,39 @@ angular
     pages: "="
   },
   templateUrl: 'page-list/page-list.template.html',
-  controller: ['Domain', '$scope', 'lodash', function (Domain, $scope, lodash) {
-    // this.pages = [
-    //   {
-    //     action: "razem",
-    //     photo: true,
-    //     show: true,
-    //     groups: [
-    //       {
-    //         name: "jesien",
-    //         position: "gorny",
-    //         languages: [
-    //           {
-    //             lang: "pl",
-    //             url: "portrety",
-    //             title: "Portrety"
-    //           },
-    //           {
-    //             lang: "en",
-    //             url: "portraits",
-    //             title: "Portraits"
-    //           }
-    //         ],
-    //         photos: [
-    //           {
-    //             id: 433,
-    //             languages: [
-    //               {
-    //                 lang: "pl",
-    //                 title: "Wojtek"
-    //               },
-    //               {
-    //                 lang: "en",
-    //                 title: "Wojtek"
-    //               }
-    //             ],
-    //             data: {
-    //                 id: 433,
-    //                 subdomain: "s3.",
-    //                 gallery_height: 277,
-    //                 gallery_width: 277,
-    //                 gallery_top: 2,
-    //                 gallery_right: 35,
-    //                 files: [
-    //                   {
-    //                     name: "max",
-    //                     path: "/photos/max/433.jpg",
-    //                     width: 796,
-    //                     height:1024
-    //                   },
-    //                   {
-    //                     name: "min",
-    //                     path: "photos/min/433.jpg",
-    //                     width: 255,
-    //                     height: 290
-    //                   },
-    //                   {
-    //                     name: "preview",
-    //                     path: "/photos/preview/433.jpg",
-    //                     width: 69,
-    //                     height: 90
-    //                   }
-    //                 ]
-    //               }
-    //           },
-    //           {
-    //             id: 433,
-    //             languages: [
-    //               {
-    //                 lang: "pl",
-    //                 title: "Wojtek"
-    //               },
-    //               {
-    //                 lang: "en",
-    //                 title: "Wojtek"
-    //               }
-    //             ],
-    //             data: {
-    //               id: 433,
-    //               subdomain: "s3.",
-    //               gallery_height: 277,
-    //               gallery_width: 277,
-    //               gallery_top: 2,
-    //               gallery_right: 35,
-    //               files: [
-    //                 {
-    //                   name: "max",
-    //                   path: "/photos/max/433.jpg",
-    //                   width: 796,
-    //                   height:1024
-    //                 },
-    //                 {
-    //                   name: "min",
-    //                   path: "photos/min/433.jpg",
-    //                   width: 255,
-    //                   height: 290
-    //                 },
-    //                 {
-    //                   name: "preview",
-    //                   path: "/photos/preview/433.jpg",
-    //                   width: 69,
-    //                   height: 90
-    //                 }
-    //               ]
-    //             }
-    //           },
-    //           {
-    //             id: 433,
-    //             languages: [
-    //               {
-    //                 lang: "pl",
-    //                 title: "Wojtek"
-    //               },
-    //               {
-    //                 lang: "en",
-    //                 title: "Wojtek"
-    //               }
-    //             ],
-    //             data: {
-    //               id: 433,
-    //               subdomain: "s3.",
-    //               gallery_height: 277,
-    //               gallery_width: 277,
-    //               gallery_top: 2,
-    //               gallery_right: 35,
-    //               files: [
-    //                 {
-    //                   name: "max",
-    //                   path: "/photos/max/433.jpg",
-    //                   width: 796,
-    //                   height:1024
-    //                 },
-    //                 {
-    //                   name: "min",
-    //                   path: "photos/min/433.jpg",
-    //                   width: 255,
-    //                   height: 290
-    //                 },
-    //                 {
-    //                   name: "preview",
-    //                   path: "/photos/preview/433.jpg",
-    //                   width: 69,
-    //                   height: 90
-    //                 }
-    //               ]
-    //             }
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   },
-    //   // {
-    //   //   action: "o-mnie",
-    //   //   photo: true,
-    //   //   show: false
-    //   // }
-    // ];
+  controller: ['Page', '$stateParams', '$state', 'lodash', function (Page, $stateParams, $state, _) {
 
+    console.log("Pages", this.pages);
 
+    this.addPage = function() {
+      Page.addPage({
+        _action: '',
+        _domain: $stateParams.domainName,
+        _photo: 'yes',
+        _show: 'no'
+      });
 
-    this.savePage = function () {
-      console.log("asd");
-      console.log(this.pages);
+      $state.reload();
     };
 
-    this.addPage = function () {
-      this.pages.push({
-        action: "",
-        photo: true,
-        show: false,
-        groups: []
+    this.addPageData = function (page) {
+
+      console.log(page);
+
+      if(!page.data) {
+        page.data = [];
+      }
+
+      page.data.push({
+        _lang: '',
+        _url: '',
+        _title: '',
+        _desc: ''
       })
     };
 
+    this.removePageData = function(page, data) {
+      _.remove(page.data, data);
+    };
   }]
 });
