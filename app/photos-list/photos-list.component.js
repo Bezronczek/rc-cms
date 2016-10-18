@@ -15,6 +15,10 @@ angular
         return File.getFileForPhoto(photo);
       };
 
+      this.getMinFile = function (photo) {
+        return File.getMinFileObject(photo);
+      };
+
       this.reload = function() {
         $state.reload('domains.pages')
       }

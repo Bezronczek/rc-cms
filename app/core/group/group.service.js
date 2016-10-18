@@ -87,6 +87,24 @@ angular
       },
       findByPageName(pageName) {
         return lodash.filter(groupsObj.groups.group, {page: {_name: pageName}});
+      },
+      addGroupToPage(group, pageName) {
+        const index = lodash.findIndex(groupsObj.groups.group, group)
+
+        if(Array.isArray(groupsObj.groups.group[index].page)) {
+          groupsObj.groups.group[index].page.push({
+            _name: pageName,
+            _position: 'gorny'
+          })
+        } else {
+          const tmp = groupsObj.groups.group[index].page;
+          groupsObj.groups.group[index].page = [tmp, {
+            _name: pageName,
+            _position: 'gorny'
+          }]
+        }
+
+        console.log(groupsObj);
       }
     }
   }]);

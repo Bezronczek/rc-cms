@@ -1,7 +1,5 @@
 <div class="row" ng-repeat="photos in $ctrl.photos | groupBy: 4">
   <div ng-repeat="photo in photos" class="col-lg-3">
-    <img class="img-thumbnail thumb" ng-src="http://placehold.it/{{$ctrl.getFiles(photo)._gallery_width}}x{{$ctrl.getFiles(photo)._gallery_height}}" alt="http://placehold.it/{{$ctrl.getFiles(photo)._gallery_width}}x{{$ctrl.getFiles(photo)._gallery_height}}">
-    <select name="" id=""></select>
-    <input ng-blur="$ctrl.reload()" type="text" ng-model="photo.group._name">
+    <img class="img-thumbnail thumb" ng-src="{{$ctrl.getMinFile(photo)._path}}" alt="{{$ctrl.getMinFile(photo)}}">
   </div>
 </div>

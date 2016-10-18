@@ -56,18 +56,30 @@
 </div>
 
 <div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | filter: {page: {_name: $ctrl.page._action}}">
-  <group group="group"></group>
+  <group group="group" name="$ctrl.page._action"></group>
 </div>
 
 <div ng-if="$ctrl.page._photo === 'yes'" class="container-fluid">
-  <form class="form-inline">
-    <select class="form-control" name="addGroup" id="">
-      <option class="form-control" value="">Existing group 1</option>
-      <option class="form-control" value="">Existing group 2</option>
-      <option value="">Create new group...</option>
-    </select>
-    <button class="btn btn-primary">Add group</button>
-  </form>
+  <!--<form class="form-inline">-->
+    <!--<select class="form-control" name="addGroup" id="">-->
+      <!--<option class="form-control" value="">Existing group 1</option>-->
+      <!--<option class="form-control" value="">Existing group 2</option>-->
+      <!--<option value="">Create new group...</option>-->
+    <!--</select>-->
+    <!--<button class="btn btn-primary">Add group</button>-->
+  <!--</form>-->
+
+  <div class="col-lg-2">
+    <ui-select on-select="$ctrl.onGroupSelect($item, $ctrl.page._action)" ng-model="selected" theme="bootstrap">
+      <ui-select-match>
+        <span ng-bind="$select.selected._name"></span>
+      </ui-select-match>
+      <ui-select-choices repeat="group in ($ctrl.groups | filter: {page: {_name: '!' + $ctrl.page._action}} | filter: {_name: $select.search})">
+        <span ng-bind="group._name"></span>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+
 </div>
 
 <div ng-if="$ctrl.page._photo === 'no'" ng-repeat="data in $ctrl.page.data">

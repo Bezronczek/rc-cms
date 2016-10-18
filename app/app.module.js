@@ -6,5 +6,5 @@ angular.module('cms', [
   'group',
   'photosList',
   'domainDetails',
-  'ui.router'
+  'ui.router',
 ]);

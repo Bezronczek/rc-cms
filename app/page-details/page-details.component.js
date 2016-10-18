@@ -9,9 +9,12 @@ angular
     pageListCtrl: "^pageList"
   },
   templateUrl: '/page-details/page-details.template.html',
-  controller: function(){
+  controller: ['Group', function(Group) {
 
-    console.log('Page details', this.page);
+    this.onGroupSelect = function(group, pageName) {
+      console.log(pageName);
+      Group.addGroupToPage(group, pageName)
+    };
 
     this.addPageData = function (page) {
 
@@ -34,5 +37,5 @@ angular
     this.pageName = function (page) {
       return page._action
     };
-  }
+  }]
 });

@@ -390,11 +390,14 @@ angular
 
   const filesObj = x2js.xml_str2json(filesXml);
 
-  console.log(filesObj);
+  console.log('FilesObj', filesObj);
 
   return {
     getFileForPhoto(photo) {
       return _.find(filesObj.files.file, {_id: photo._id});
+    },
+    getMinFileObject(photo) {
+      return _.find(_.find(filesObj.files.file, {_id: photo._id}).data, {_name: 'min'})
     }
   }
 

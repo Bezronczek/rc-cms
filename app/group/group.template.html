@@ -1,20 +1,20 @@
 <div class="panel panel-primary">
-  <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{$ctrl.group._name}}PanelContent"
-       aria-expanded="true" aria-controls="{{$ctrl.group._name}}PanelContent">
+  <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent"
+       aria-expanded="true" aria-controls="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
         <span class="h4">
           Grupa: {{$ctrl.group._name}}
         </span>
   </div>
-  <div class="panel-body collapse" id="{{$ctrl.group._name}}PanelContent">
+  <div class="panel-body collapse" id="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
     <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{$ctrl.group._name}}Data"-->
             <!--aria-expanded="true" aria-controls="{{$ctrl.group._name}}Data">Szczegoly-->
     <!--</button>-->
     <div class="panel panel-default">
-      <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{$ctrl.group._name}}GroupSettings"
-           aria-expanded="true" aria-controls="{{$ctrl.group._name}}GroupSettings">
+      <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings"
+           aria-expanded="true" aria-controls="Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings">
         <span>Ustawienia</span>
       </div>
-      <div class="panel-body collapse" id="{{$ctrl.group._name}}GroupSettings">
+      <div class="panel-body collapse" id="Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings">
         <div class="well">
 
           <div class="btn-group bot15">

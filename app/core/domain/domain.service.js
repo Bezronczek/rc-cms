@@ -12,9 +12,7 @@ angular
 
   // Obiekty domen umieszczone sa w tablicy domainObj.domains.domain
   const domainsObj = x2js.xml_str2json(xmlString);
-
-  console.log('Domains:', domainsObj);
-
+  
   return {
     list() {
       return domainsObj.domains.domain;

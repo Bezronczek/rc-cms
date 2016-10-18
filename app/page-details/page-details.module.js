@@ -2,5 +2,7 @@ angular.module('pageDetails', [
   'ngLodash',
   'core',
   'angular-confirm',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngSanitize',
+  'ui.select'
 ]);

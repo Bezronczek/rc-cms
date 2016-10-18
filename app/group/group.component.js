@@ -2,7 +2,8 @@ angular
   .module('group')
   .component('group', {
     bindings: {
-      group: "="
+      group: "=",
+      name: "="
     },
     templateUrl: 'group/group.template.html',
     controller: ['lodash', 'Photo', function (_, Photo) {
