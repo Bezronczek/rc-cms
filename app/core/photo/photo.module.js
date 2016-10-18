@@ -1,3 +1,4 @@
 angular.module('core.photo', [
-  'ngLodash'
+  'ngLodash',
+  'cb.x2js'
 ]);

@@ -31,3 +31,17 @@ li.list-group-item.active > a {
 .top15 {
     margin-top: 15px;
 }
+
+.bot15 {
+    margin-bottom: 15px;
+}
+
+.thumb {
+    margin-bottom: 30px;
+    max-height: 200px;
+}
+
+.panel-heading-page {
+    background-image: none !important;
+    background-color: white;
+}

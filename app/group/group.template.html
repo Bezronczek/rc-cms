@@ -1,0 +1,51 @@
+<div class="panel panel-primary">
+  <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{$ctrl.group._name}}PanelContent"
+       aria-expanded="true" aria-controls="{{$ctrl.group._name}}PanelContent">
+        <span class="h4">
+          Grupa: {{$ctrl.group._name}}
+        </span>
+  </div>
+  <div class="panel-body collapse" id="{{$ctrl.group._name}}PanelContent">
+    <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{$ctrl.group._name}}Data"-->
+            <!--aria-expanded="true" aria-controls="{{$ctrl.group._name}}Data">Szczegoly-->
+    <!--</button>-->
+    <div class="panel panel-default">
+      <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{$ctrl.group._name}}GroupSettings"
+           aria-expanded="true" aria-controls="{{$ctrl.group._name}}GroupSettings">
+        <span>Ustawienia</span>
+      </div>
+      <div class="panel-body collapse" id="{{$ctrl.group._name}}GroupSettings">
+        <div class="well">
+
+          <div class="btn-group bot15">
+            <label class="btn btn-primary" ng-model="$ctrl.group.page._position" uib-btn-radio="'gorny'">Gorny</label>
+            <label class="btn btn-primary" ng-model="$ctrl.group.page._position" uib-btn-radio="'dolny'">Dolny</label>
+          </div>
+
+
+          <!--<div class="form-group group-position">-->
+          <!--<input type="radio" ng-model="group.position" value="dolny"> Dolny-->
+          <!--<input type="radio" ng-model="group.position" value="gorny"> Gorny-->
+          <!--</div>-->
+
+          <div ng-repeat="data in $ctrl.group.data" class="form-group language-group form-inline">
+            <input ng-model="data._lang" type="text" class="form-control group-form-control" placeholder="Jezyk">
+            <input ng-model="data._url" type="text" class="form-control group-form-control" placeholder="URL">
+            <input ng-model="data._title" type="text" class="form-control group-form-control" placeholder="Tytul">
+            <a ng-click="$ctrl.removeGroupData(data)" href="">
+              <span class="glyphicon glyphicon-remove"></span>
+            </a>
+          </div>
+          <button ng-click="$ctrl.addGroupData()" class="btn btn-primary">Dodaj jezyk</button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="photos-list container-fluid top15">
+      <photos-list photos="$ctrl.photos"></photos-list>
+    </div>
+  </div>
+</div>
+
+

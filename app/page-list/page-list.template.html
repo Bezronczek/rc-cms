@@ -3,50 +3,26 @@
 
     <div class="row">
 
-      <h1 ng-class="{'text-danger': page._action === ''}" class="page-header">Strona: {{page._action === "" ? "&lt;uzupelnij akcje&gt;" : page._action}}</h1>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{page._action}}Details" aria-expanded="true" aria-controls="{{page.action}}Details">Szczegoly</button>
+      <div class="panel panel-default top15" >
+        <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{page._action}}Details"
+             aria-expanded="true" aria-controls="{{page.action}}Groups">
+          <span class="h3" ng-class="{'text-danger': page._action === ''}" >
+            Strona: {{page._action === "" ? "&lt;uzupelnijakcje&gt;" : page._action}}
+          </span><span class="glyphicon glyphicon-menu-down"></span>
+        </div>
+        <div class="pageDetails panel-body collapse" ng-class="{in:$first}" id="{{page._action}}Details">
+          <!--<div class="checkbox">-->
+          <!--<label>-->
+          <!--<input type="checkbox" ng-true-value="'yes'" ng-false-value="'no'" ng-model="page._photo"> Photo Page-->
+          <!--</label>-->
+          <!--</div>-->
+          <!--<div class="checkbox">-->
+          <!--<label>-->
+          <!--<input type="checkbox" name="show" ng-true-value="'yes'" ng-false-value="'no'" ng-model="page._show"> Show-->
+          <!--</label>-->
+          <!--</div>-->
 
-      <div class="collapse panel panel-default top15" id="{{page._action}}Details">
-        <div class="pageDetails panel-body">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-true-value="'yes'" ng-false-value="'no'" ng-model="page._photo"> Photo Page
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="show" ng-true-value="'yes'" ng-false-value="'no'" ng-model="page._show"> Show
-            </label>
-          </div>
-          <label for="{{page._action}}Action">Akcja: </label>
-          <input id="{{page._action}}Action" type="text" class="form-control input-auto-width" placeholder="action" ng-model="page._action">
-
-          <label for="{{page._action}}Domain">Domena: </label>
-          <input id="{{page._action}}Domain" type="text" class="form-control input-auto-width" placeholder="action" ng-model="page._domain">
-
-          <div ng-repeat="data in page.data" class="well top15">
-            <div  class="form-group">
-              <!--_lang-->
-              <label ng-class="{'text-danger': data._lang===''}" for="{{page._action}}PageDataLang{{data._lang}}">Jezyk:</label>
-              <input id="{{page._action}}PageDataLang{{data._lang}}" ng-model="data._lang" type="text" class="form-control input-auto-width" placeholder="lang" />
-
-              <!--_url-->
-              <label ng-class="{'text-danger': data._url===''}" for="{{page._action}}PageDataLang{{data._url}}">Url:</label>
-              <input id="{{page._action}}PageDataLang{{data._url}}" ng-model="data._url" type="text" class="form-control input-auto-width" placeholder="url" />
-
-              <!--_title-->
-              <label ng-class="{'text-danger': data._title===''}" for="{{page._action}}PageDataLang{{data._title}}">Tytul:</label>
-              <input id="{{page._action}}PageDataLang{{data._title}}" ng-model="data._title" type="text" class="form-control " placeholder="title" />
-
-              <!--_desc-->
-              <label ng-class="{'text-danger': data._desc===''}" for="{{page._action}}PageDataLang{{data._desc}}">Opis:</label>
-              <textarea id="{{page._action}}PageDataLang{{data._desc}}" ng-model="data._desc" type="text" class="form-control " placeholder="desc" rows="2"></textarea>
-
-              <button class="btn btn-danger top15" ng-click="$ctrl.removePageData(page, data)">Usun</button>
-            </div>
-          </div>
-
-          <button ng-click="$ctrl.addPageData(page)" class="btn btn-primary top15">Dodaj dane</button>
+          <page-details page="page" groups="$ctrl.groups"></page-details>
 
         </div>
       </div>
@@ -55,33 +31,17 @@
 
     <!--GROUP -->
 
-    <!--<ui-view ng-if="page.photo"></ui-view>-->
-
-    <group-list ng-if="page._photo === 'yes'" groups="page.groups"></group-list>
-
+    <!--<ui-view name="groups" ng-if="page.photo"></ui-view>-->
+    <!--<group ng-if="page._photo === 'yes'" groups="$ctrl.groups | filter: {page:{_name: page._action}}"></group>-->
     <!--/ GROUP-->
 
     <!--GROUP FOOTER-->
 
-    <div ng-if="page._photo === 'yes'" class="row top15">
-      <form class="form-inline">
-        <select class="form-control" name="addGroup" id="">
-          <option class="form-control" value="">Existing group 1</option>
-          <option class="form-control" value="">Existing group 2</option>
-          <option value="">Create new group...</option>
-        </select>
-        <button class="btn btn-primary">Add group</button>
-      </form>
-    </div>
+
 
     <!--/ GROUP FOOTER-->
 
-    <div ng-if="page._photo === 'no'" ng-repeat="data in page.data" class="row">
-      <div class="well">
-        <textarea class="form-control" rows="10" ng-model="data.__cdata"></textarea>
-      </div>
 
-    </div>
 
   </div>
 </div>

@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+  <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{$ctrl.page._action}}PageSettings"
+    aria-expanded="true" aria-controls="{{$ctrl.page._action}}PageSettings">
+    <span>Ustawienia</span>
+  </div>
+  <div class="panel-body collapse" id="{{$ctrl.page._action}}PageSettings">
+    <div class="btn-group">
+      <label uib-btn-checkbox btn-checkbox-true="'yes'" btn-checkbox-false="'no'" ng-model="$ctrl.page._photo"
+             class="btn btn-primary">Photo page</label>
+      <label uib-btn-checkbox btn-checkbox-true="'yes'" btn-checkbox-false="'no'" ng-model="$ctrl.page._show"
+             class="btn btn-primary">Show</label>
+    </div>
+    <br/>
+
+    <label for="{{$ctrl.page._action}}Action">Akcja: </label>
+    <input id="{{$ctrl.page._action}}Action" type="text" class="form-control input-auto-width" placeholder="action"
+           ng-model="$ctrl.page._action">
+
+    <label for="{{$ctrl.page._action}}Domain">Domena: </label>
+    <input id="{{$ctrl.page._action}}Domain" type="text" class="form-control input-auto-width" placeholder="domain"
+           ng-model="$ctrl.page._domain">
+
+    <div ng-repeat="data in $ctrl.page.data" class="well top15">
+      <div class="form-group">
+        <!--_lang-->
+        <label ng-class="{'text-danger': data._lang===''}"
+               for="{{$ctrl.page._action}}PageDataLang{{data._lang}}">Jezyk:</label>
+        <input id="{{$ctrl.page._action}}PageDataLang{{data._lang}}" ng-model="data._lang" type="text"
+               class="form-control input-auto-width" placeholder="lang"/>
+
+        <!--_url-->
+        <label ng-class="{'text-danger': data._url===''}"
+               for="{{$ctrl.page._action}}PageDataLang{{data._url}}">Url:</label>
+        <input id="{{$ctrl.page._action}}PageDataLang{{data._url}}" ng-model="data._url" type="text"
+               class="form-control input-auto-width" placeholder="url"/>
+
+        <!--_title-->
+        <label ng-class="{'text-danger': data._title===''}" for="{{$ctrl.page._action}}PageDataLang{{data._title}}">Tytul:</label>
+        <input id="{{$ctrl.page._action}}PageDataLang{{data._title}}" ng-model="data._title" type="text"
+               class="form-control " placeholder="title"/>
+
+        <!--_desc-->
+        <label ng-class="{'text-danger': data._desc===''}"
+               for="{{$ctrl.page._action}}PageDataLang{{data._desc}}">Opis:</label>
+        <textarea id="{{$ctrl.page._action}}PageDataLang{{data._desc}}" ng-model="data._desc" type="text"
+                  class="form-control " placeholder="desc" rows="2"></textarea>
+
+        <button class="btn btn-danger top15" confirm="Na pewno?" confirm-settings="{size: 'sm'}"
+                ng-click="$ctrl.removePageData($ctrl.page, data)">Usun
+        </button>
+      </div>
+    </div>
+
+    <button ng-click="$ctrl.addPageData($ctrl.page)" class="btn btn-primary top15">Dodaj dane</button>
+  </div>
+</div>
+
+<div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | filter: {page: {_name: $ctrl.page._action}}">
+  <group group="group"></group>
+</div>
+
+<div ng-if="$ctrl.page._photo === 'yes'" class="container-fluid">
+  <form class="form-inline">
+    <select class="form-control" name="addGroup" id="">
+      <option class="form-control" value="">Existing group 1</option>
+      <option class="form-control" value="">Existing group 2</option>
+      <option value="">Create new group...</option>
+    </select>
+    <button class="btn btn-primary">Add group</button>
+  </form>
+</div>
+
+<div ng-if="$ctrl.page._photo === 'no'" ng-repeat="data in $ctrl.page.data">
+  <div class="well">
+    <label for="{{$ctrl.page._name}}cdataContent{{data._lang}}">Tresc dla danych w jezyku {{data._lang}}</label>
+    <textarea id="{{$ctrl.page._name}}cdataContent{{data._lang}}" class="form-control" rows="10"
+              ng-model="data.__cdata"></textarea>
+  </div>
+</div>

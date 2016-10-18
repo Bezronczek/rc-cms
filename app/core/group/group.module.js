@@ -1,3 +1,4 @@
 angular.module('core.group', [
-  'ngLodash'
+  'ngLodash',
+  'cb.x2js'
 ]);

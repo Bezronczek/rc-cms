@@ -2,7 +2,8 @@ angular.module('cms', [
   'core',
   'domainView',
   'pageList',
-  'groupList',
+  'pageDetails',
+  'group',
   'photosList',
   'domainDetails',
   'ui.router'

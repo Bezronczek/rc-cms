@@ -1,1 +1,3 @@
-angular.module('photosList', []);
+angular.module('photosList', [
+  'angular.filter'
+]);

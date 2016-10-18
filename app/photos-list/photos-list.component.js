@@ -4,9 +4,19 @@ angular
   bindings: {
     photos: "="
   },
+  require: {
+    parent: "^group"
+  },
   templateUrl: 'photos-list/photos-list.template.html',
-  controller: ['$scope',
-    function ($scope) {
+  controller: ['File', '$state',
+    function (File, $state) {
 
+      this.getFiles = function(photo) {
+        return File.getFileForPhoto(photo);
+      };
+
+      this.reload = function() {
+        $state.reload('domains.pages')
+      }
   }]
 });

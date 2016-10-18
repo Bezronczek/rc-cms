@@ -23,16 +23,19 @@ angular.module('cms')
               component: 'domainDetails'
             }
           },
-          url: '{domainName}',
+          url: 'domains/{domainName}',
           resolve: {
             pages: function (Page, $stateParams) {
               return Page.listByDomainName($stateParams.domainName);
             },
             domainDetails: function (Domain, $stateParams) {
               return Domain.getDomainDetails($stateParams.domainName);
+            },
+            groups: function (Group) {
+              return Group.list().groups.group;
             }
           }
-        }
+        },
       ];
 
       states.forEach(function (state) {

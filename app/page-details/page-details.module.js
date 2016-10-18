@@ -1,4 +1,4 @@
-angular.module('pageList', [
+angular.module('pageDetails', [
   'ngLodash',
   'core',
   'angular-confirm',

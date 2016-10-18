@@ -113,6 +113,18 @@ angular
           _photo,
           _show
         });
+      },
+      updateDomainName(domainName, newName) {
+        console.log(pagesObj.pages.page);
+
+
+        pagesObj.pages.page.forEach(page => {
+          if(page._domain === domainName) {
+            page._domain = newName;
+          }
+        });
+        console.log(pagesObj.pages.page);
+
       }
     }
   }]);
