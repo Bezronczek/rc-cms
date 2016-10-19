@@ -8,8 +8,21 @@ angular
     parent: "^group"
   },
   templateUrl: 'photos-list/photos-list.template.html',
-  controller: ['File', '$state',
-    function (File, $state) {
+  controller: ['File', '$state', '$uibModal',
+    function (File, $state, $uibModal) {
+
+      this.openPhotoDetailModal = function(photo) {
+        $uibModal.open({
+          component: 'photoDetail',
+          size: 'lg',
+          resolve: {
+            photo: photo,
+            files: function () {
+              return File.getFileForPhoto(photo);
+            }
+          }
+        })
+      };
 
       this.getFiles = function(photo) {
         return File.getFileForPhoto(photo);

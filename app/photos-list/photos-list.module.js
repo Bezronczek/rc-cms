@@ -1,3 +1,4 @@
 angular.module('photosList', [
-  'angular.filter'
+  'angular.filter',
+  'ui.bootstrap'
 ]);

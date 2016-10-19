@@ -1,5 +1,5 @@
 <div class="row" ng-repeat="photos in $ctrl.photos | groupBy: 4">
   <div ng-repeat="photo in photos" class="col-lg-3">
-    <img class="img-thumbnail thumb" ng-src="{{$ctrl.getMinFile(photo)._path}}" alt="{{$ctrl.getMinFile(photo)}}">
+    <img class="img-thumbnail thumb center-block" ng-src="{{$ctrl.getMinFile(photo)._path}}" ng-click="$ctrl.openPhotoDetailModal(photo)">
   </div>
 </div>

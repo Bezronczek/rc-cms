@@ -55,23 +55,18 @@
   </div>
 </div>
 
+<!--GRUPY-->
+
 <div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | filter: {page: {_name: $ctrl.page._action}}">
   <group group="group" name="$ctrl.page._action"></group>
 </div>
 
-<div ng-if="$ctrl.page._photo === 'yes'" class="container-fluid">
-  <!--<form class="form-inline">-->
-    <!--<select class="form-control" name="addGroup" id="">-->
-      <!--<option class="form-control" value="">Existing group 1</option>-->
-      <!--<option class="form-control" value="">Existing group 2</option>-->
-      <!--<option value="">Create new group...</option>-->
-    <!--</select>-->
-    <!--<button class="btn btn-primary">Add group</button>-->
-  <!--</form>-->
+<!--SELEKTOR GRUP-->
 
+<div ng-if="$ctrl.page._photo === 'yes'" class="container-fluid">
   <div class="col-lg-2">
-    <ui-select on-select="$ctrl.onGroupSelect($item, $ctrl.page._action)" ng-model="selected" theme="bootstrap">
-      <ui-select-match>
+    <ui-select on-select="$ctrl.onGroupSelect($item, $ctrl.page._action)" ng-model="$selected" theme="bootstrap">
+      <ui-select-match placeholder="Dodaj grupe do strony">
         <span ng-bind="$select.selected._name"></span>
       </ui-select-match>
       <ui-select-choices repeat="group in ($ctrl.groups | filter: {page: {_name: '!' + $ctrl.page._action}} | filter: {_name: $select.search})">
@@ -79,8 +74,14 @@
       </ui-select-choices>
     </ui-select>
   </div>
-
+  <button ng-click="$ctrl.createEmptyGroup()" class="btn btn-primary">Stworz pusta grupe</button>
 </div>
+
+<!--/ SELEKTOR GRUP-->
+
+<!--/ GRUPY-->
+
+<!--EDYTOR TRESCI-->
 
 <div ng-if="$ctrl.page._photo === 'no'" ng-repeat="data in $ctrl.page.data">
   <div class="well">
@@ -89,3 +90,5 @@
               ng-model="data.__cdata"></textarea>
   </div>
 </div>
+
+<!--/ EDYTOR TRESCI-->

@@ -16,6 +16,18 @@ angular
       Group.addGroupToPage(group, pageName)
     };
 
+    this.createEmptyGroup = function () {
+      this.groups.push({
+        _name: 'placeholder',
+        page: {
+          _name: this.page._action,
+          _position: 'gorny'
+        }
+      });
+
+      console.log(this.groups);
+    };
+
     this.addPageData = function (page) {
 
       if(!page.data) {

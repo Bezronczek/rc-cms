@@ -81,6 +81,8 @@ angular
 
     const groupsObj = x2js.xml_str2json(xmlString);
 
+    console.log("groupsObj\n", groupsObj);
+
     return {
       list() {
         return groupsObj;
@@ -89,7 +91,7 @@ angular
         return lodash.filter(groupsObj.groups.group, {page: {_name: pageName}});
       },
       addGroupToPage(group, pageName) {
-        const index = lodash.findIndex(groupsObj.groups.group, group)
+        const index = lodash.findIndex(groupsObj.groups.group, group);
 
         if(Array.isArray(groupsObj.groups.group[index].page)) {
           groupsObj.groups.group[index].page.push({

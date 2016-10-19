@@ -1,47 +1,21 @@
 <div ng-repeat="page in $ctrl.pages" class="container-fluid page">
   <div class="col-lg-12">
-
     <div class="row">
-
-      <div class="panel panel-default top15" >
+      <div class="panel panel-default top15">
         <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{page._action}}Details"
-             aria-expanded="true" aria-controls="{{page.action}}Groups">
-          <span class="h3" ng-class="{'text-danger': page._action === ''}" >
+             aria-expanded="true" aria-controls="{{page.action}}Groups"
+             ng-init="$first ? panelIconToggle = 'glyphicon-menu-up' : panelIconToggle = 'glyphicon-menu-down'"
+             ng-click="panelIconToggle === 'glyphicon-menu-up' ? panelIconToggle = 'glyphicon-menu-down' : panelIconToggle = 'glyphicon-menu-up'">
+          <span class="glyphicon" ng-class="panelIconToggle"></span>
+          <span class="h3" ng-class="{'text-danger': page._action === ''}">
             Strona: {{page._action === "" ? "&lt;uzupelnijakcje&gt;" : page._action}}
-          </span><span class="glyphicon glyphicon-menu-down"></span>
+          </span>
         </div>
         <div class="pageDetails panel-body collapse" ng-class="{in:$first}" id="{{page._action}}Details">
-          <!--<div class="checkbox">-->
-          <!--<label>-->
-          <!--<input type="checkbox" ng-true-value="'yes'" ng-false-value="'no'" ng-model="page._photo"> Photo Page-->
-          <!--</label>-->
-          <!--</div>-->
-          <!--<div class="checkbox">-->
-          <!--<label>-->
-          <!--<input type="checkbox" name="show" ng-true-value="'yes'" ng-false-value="'no'" ng-model="page._show"> Show-->
-          <!--</label>-->
-          <!--</div>-->
-
           <page-details page="page" groups="$ctrl.groups"></page-details>
-
         </div>
       </div>
-
     </div>
-
-    <!--GROUP -->
-
-    <!--<ui-view name="groups" ng-if="page.photo"></ui-view>-->
-    <!--<group ng-if="page._photo === 'yes'" groups="$ctrl.groups | filter: {page:{_name: page._action}}"></group>-->
-    <!--/ GROUP-->
-
-    <!--GROUP FOOTER-->
-
-
-
-    <!--/ GROUP FOOTER-->
-
-
 
   </div>
 </div>

@@ -2,13 +2,6 @@
   <div class="row">
     <div class="container-fluid">
       <div class="list-group">
-        <!--<li ng-click="$ctrl.setActiveDomain(domain.name)" ng-class="{'active': $ctrl.activeDomain == domain.name}" ng-repeat="domain in $ctrl.domains" href="#" class="list-group-item">-->
-          <!--{{domain.name}}-->
-          <!--<a ng-click="$ctrl.removeDomain(domain.name)"><span class="glyphicon glyphicon-remove pull-right"></span></a>-->
-        <!--</li>-->
-        <!--<li ng-repeat="domain in $ctrl.domains" class="list-group-item" ui-sref-active="active">-->
-          <!--<a href="#" ui-sref="domains.pages({domainName: domain.name})" >{{domain.name}}</a>-->
-        <!--</li>-->
 
         <a href="#" ui-sref="domains.pages({domainName: domain._name})" ui-sref-active="active" ng-repeat="domain in $ctrl.domains" class="list-group-item">
           {{domain._name}}
@@ -32,9 +25,6 @@
 </div>
 
 <div class="col-lg-10">
-
-  <!--<page-list></page-list>-->
   <div ui-view="details"></div>
   <div ui-view="pages"></div>
-  <!--/ Pages And Groups-->
 </div>
