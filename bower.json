@@ -8,6 +8,8 @@
     "bootstrap": "3.3.x",
     "angular-resource": "1.5.x",
     "angular-mocks": "1.5.x",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "dragular": "^4.2.3",
+    "angular-drag-and-drop-lists": "^1.4.0"
   }
 }

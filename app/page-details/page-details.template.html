@@ -56,10 +56,13 @@
 </div>
 
 <!--GRUPY-->
-
-<div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | filter: {page: {_name: $ctrl.page._action}}">
-  <group group="group" name="$ctrl.page._action"></group>
+<div class="groups-container">
+  <!--filter: {page: {_name: $ctrl.page._action}}-->
+  <div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | page: $ctrl.page._action">
+    <group group="group" name="$ctrl.page._action"></group>
+  </div>
 </div>
+
 
 <!--SELEKTOR GRUP-->
 

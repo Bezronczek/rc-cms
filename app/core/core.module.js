@@ -3,5 +3,6 @@ angular.module('core', [
   'core.page',
   'core.group',
   'core.photo',
-  'core.file'
+  'core.file',
+  'ngLodash'
 ]);
