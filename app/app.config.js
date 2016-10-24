@@ -36,6 +36,47 @@ angular.module('cms')
             }
           }
         },
+        {
+          name: 'photos-view',
+          url: '/photos',
+          component: 'photosView',
+          resolve: {
+            groups: function (Group) {
+              return Group.list().groups.group
+            },
+          }
+        },
+        {
+          name: 'photos-view.all',
+          url: '/photos/all',
+          views: {
+            photos: {
+              component: 'photosList'
+            }
+          },
+          resolve: {
+            photos: function (Photo) {
+              return Photo.list();
+            }
+          }
+        },
+        {
+          name: 'photos-view.photos',
+          url: '/{groupName}',
+          views: {
+            photos: {
+              component: 'photosList'
+            }
+          },
+          resolve: {
+            photos: function(Photo, $stateParams) {
+              return Photo.getPhotosForGroup($stateParams.groupName);
+            },
+            groupname: function ($stateParams) {
+              return $stateParams.groupName
+            }
+          }
+        }
       ];
 
       states.forEach(function (state) {

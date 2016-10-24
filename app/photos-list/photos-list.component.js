@@ -1,39 +1,113 @@
 angular
-.module('photosList')
-.component('photosList', {
-  bindings: {
-    photos: "="
-  },
-  require: {
-    parent: "^group"
-  },
-  templateUrl: 'photos-list/photos-list.template.html',
-  controller: ['File', '$state', '$uibModal',
-    function (File, $state, $uibModal) {
+  .module('photosList')
+  .component('photosList', {
+    bindings: {
+      groupname: "<"
+    },
+    templateUrl: 'photos-list/photos-list.template.html',
+    controller: ['File', '$uibModal', 'dragularService', '$element', 'Photo', '$filter', 'Upload', 'lodash',
+      function (File, $uibModal, dragularService, $element, Photo, $filter, Upload, _) {
 
-      this.openPhotoDetailModal = function(photo) {
-        $uibModal.open({
-          component: 'photoDetail',
-          size: 'lg',
-          resolve: {
-            photo: photo,
-            files: function () {
-              return File.getFileForPhoto(photo);
-            }
+        const self = this;
+        self.photos = Photo.list();
+        self.tmpFiles = [];
+        self.filteredModel = [];
+
+        dragularService($element.children(), {
+          containersModel: self.photos,
+          containersFilteredModel: self.filteredModel
+        });
+
+        self.getFilteredModel = function (filteredModel, items, filterQuery) {
+          filteredModel.length = 0;
+          [].push.apply(filteredModel, $filter('photo')(items, filterQuery));
+          return filteredModel;
+        };
+
+        self.fileChange = function (files) {
+          for (let file of files) {
+            let nextId = Photo.getNextId();
+            //<editor-fold desc="loadImage blob">
+            // let reader = new FileReader();
+            // reader.onloadend = function (e) {
+            //
+            //   loadImage(file,
+            //     function (img) {
+            //       if (img.type !== 'error') {
+            //         img.toBlob(function (blob) {
+            //           self.tmpFiles.push(URL.createObjectURL(blob));
+            //         }, 'image/jpeg');
+            //       } else {
+            //         // if ('function' === typeof onError) {
+            //         //   onError(imageData.preview);
+            //         // }
+            //       }
+            //     },
+            //     {
+            //       maxWidth: 550,
+            //       maxHeight: 550,
+            //       canvas: true
+            //     });
+            //
+            //   // self.tmpFiles.push(e.target.result);
+            // };
+            //</editor-fold>
+
+            let upload = Upload.http({
+              url: `/getPhoto?id=${nextId}`,
+              data: file
+            });
+
+            Upload.dataUrl(file)
+              .then(url => {
+                self.tmpFiles.push({id: nextId, data:url})
+              });
+
+            upload.then(resp => {
+              const newPhoto = {
+                _id: resp.data._id,
+                group: {_name: self.groupname},
+                data: []
+              };
+
+              File
+                .addFilesForPhoto(resp.data)
+                .then(() => {
+                  return Photo.replaceTempPhoto(resp.data._id, newPhoto);
+                })
+                .then(() => {
+                  _.remove(self.tmpFiles, {id: resp.data._id});
+                });
+
+              // console.log(resp.data);
+            });
           }
-        })
-      };
+        };
 
-      this.getFiles = function(photo) {
-        return File.getFileForPhoto(photo);
-      };
+        self.openPhotoDetailModal = function (photo) {
+          $uibModal.open({
+            component: 'photoDetail',
+            size: 'lg',
+            resolve: {
+              photo: photo,
+              files: function () {
+                return File.getFileForPhoto(photo);
+              }
+            }
+          })
+        };
 
-      this.getMinFile = function (photo) {
-        return File.getMinFileObject(photo);
-      };
+        self.removePhotoFromGroup = function (photo, groupName) {
+          photo.group._name = '';
+        };
 
-      this.reload = function() {
-        $state.reload('domains.pages')
-      }
-  }]
-});
+        self.getFiles = function (photo) {
+          return File.getFileForPhoto(photo);
+        };
+
+        self.getMinFile = function (photo) {
+          return File.getMinFileObject(photo);;
+        };
+
+      }]
+  });

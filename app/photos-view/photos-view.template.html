@@ -2,15 +2,17 @@
   <div class="row">
     <div class="container-fluid">
       <div class="list-group draggable">
-
-        <a href="#" ui-sref="domains.pages({domainName: domain._name})" ui-sref-active="active" ng-repeat="domain in $ctrl.domains" class="list-group-item">
-          {{domain._name}}
+        <a href="" ui-sref="photos-view.all" ui-sref-active="active" class="list-group-item">
+          Wszystkie
         </a>
 
-        <a href="#" ui-sref="domains.pages({domainName: ''})" ui-sref-active="active" class="list-group-item">
+        <a href="" ui-sref="photos-view.photos({groupName: ''})" ui-sref-active="active" class="list-group-item">
           Nieprzypisane
         </a>
 
+        <a href="#" ui-sref="photos-view.photos({groupName: group._name})" ui-sref-active="active" ng-repeat="group in $ctrl.groups" class="list-group-item">
+          {{group._name}}
+        </a>
       </div>
 
       <div class="input-group">
@@ -25,6 +27,6 @@
 </div>
 
 <div class="col-lg-10">
-  <div ui-view="details"></div>
-  <div ui-view="pages"></div>
+  <!--<div ui-view="details"></div>-->
+  <div ui-view="photos"></div>
 </div>

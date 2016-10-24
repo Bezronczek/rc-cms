@@ -400,7 +400,41 @@ angular
       return _.filter(photosObj.photos.photo, {group: {_name: groupName}})
     },
     getNextId() {
-      return Math.max(...photosObj.photos.photo.map(o => +o._id)) + 1;
+      const nextId = Math.max(...photosObj.photos.photo.map(o => +o._id)) + 1;
+      // reserve id for photo
+      photosObj.photos.photo.push({
+        _id: nextId,
+        temp: true
+      });
+      return nextId;
+    },
+    replaceTempPhoto(photoId, photo) {
+      return new Promise(resolve => {
+        let index = _.findIndex(photosObj.photos.photo, {_id: photoId});
+        photosObj.photos.photo[index] = photo;
+        resolve();
+      });
+    },
+    newPhoto(photo) {
+      return new Promise(resolve => {
+        photosObj.photos.photo.push(photo);
+        resolve();
+      });
+
+    },
+    list() {
+      // return _.filter(photosObj.photos.photo, photo => {
+      //   return photo.hasOwnProperty('temp') === false;
+      // });
+      return photosObj.photos.photo
+    },
+    addPhoto(id, group) {
+      photosObj.photos.photo.push({
+        _id: `"${id}"`,
+        group: {
+          _name: group
+        }
+      });
     }
   }
 

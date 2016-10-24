@@ -2,6 +2,44 @@
   Photo Detail
 </div>
 <div class="modal-body">
+  <div class="container-fluid">
+    <div class="col-lg-12">
+      <div class="row">
+        <img class="img-responsive center-block" ng-src="{{$ctrl.resolve.files.data[1]._path}}" alt="">
+      </div>
+
+      <div class="row top15">
+        <div ng-repeat="data in $ctrl.resolve.photo.data">
+          <div class="form-group form-inline">
+            <label for="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}">Jezyk</label>
+            <input id="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}" class="form-control" type="text"
+                   ng-model="data._lang">
+            <label for="{{$ctrl.resolve.photo._id}}TitleInput{{data._lang}}">Tytul</label>
+            <input id="{{$ctrl.resolve.photo._id}}TitleInput{{data._lang}}" class="form-control" type="text"
+                   ng-model="data._title">
+            <a href="" ng-click="$ctrl.removePhotoData(data)"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+        </div>
+        <button class="btn btn-primary" ng-click="$ctrl.addPhotoData()">Dodaj dane</button>
+      </div>
+
+    </div>
+    <div class="col-lg-3">
+      <div class="row">
+        <ui-select class="top15" on-select="$ctrl.movePhotoToGroup($select.selected._name)" ng-model="$selected">
+          <ui-select-match placeholder="Przenies do grupy">
+            <span ng-bind="$select.selected._name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="group in ($ctrl.groups | filter: {_name: $select.search})">
+            <span ng-bind="group._name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+    </div>
+  </div>
+
+
   <pre>
     {{$ctrl.resolve.photo}}
   </pre>

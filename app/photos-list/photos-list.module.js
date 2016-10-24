@@ -1,4 +1,5 @@
 angular.module('photosList', [
   'angular.filter',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngFileUpload'
 ]);

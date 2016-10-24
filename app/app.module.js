@@ -1,6 +1,7 @@
 angular.module('cms', [
   'core',
   'domainView',
+  'photosView',
   'pageList',
   'pageDetails',
   'group',
@@ -8,4 +9,5 @@ angular.module('cms', [
   'photoDetail',
   'domainDetails',
   'ui.router',
+  'dragularModule'
 ]);

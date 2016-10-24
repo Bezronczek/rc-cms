@@ -398,6 +398,25 @@ angular
     },
     getMinFileObject(photo) {
       return _.find(_.find(filesObj.files.file, {_id: photo._id}).data, {_name: 'min'})
+    },
+    getPreviewFileObject(photo) {
+      return _.find(_.find(filesObj.files.file, {_id: photo._id}).data, {_name: 'preview'})
+    },
+    getMaxFileObject(photo) {
+      return _.find(_.find(filesObj.files.file, {_id: photo._id}).data, {_name: 'max'})
+    },
+    list() {
+      return filesObj.files.file
+    },
+    getFileById(photoId) {
+      return _.find(filesObj.files.file, {_id: photoId});
+    },
+    addFilesForPhoto(file) {
+      return new Promise(resolve => {
+        filesObj.files.file.push(file);
+        resolve();
+      });
+
     }
   }
 

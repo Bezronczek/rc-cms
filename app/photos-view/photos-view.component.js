@@ -1,13 +1,13 @@
 angular
-  .module('domainView')
-  .component('domainView', {
+  .module('photosView')
+  .component('photosView', {
     bindings: {
-      domains: "="
+      groups: "="
     },
-    templateUrl: 'domain-view/domain-view.template.html',
+    templateUrl: 'photos-view/photos-view.template.html',
     controller: ['$state', 'dragularService', '$element',
-      function DomainListController($state) {
-
+      function ($state) {
+        console.log(this.groups);
 
         this.addDomain = function (name) {
           this.domains.push({

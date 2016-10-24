@@ -1,3 +1,5 @@
 angular.module('photoDetail', [
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngSanitize',
+  'ui.select'
 ]);

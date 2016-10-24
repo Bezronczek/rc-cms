@@ -80,8 +80,9 @@ angular
     //endregion
 
     const groupsObj = x2js.xml_str2json(xmlString);
+    const defaultGroupPosition = 'gorny';
 
-    console.log("groupsObj\n", groupsObj);
+    // console.log("groupsObj\n", groupsObj);
 
     return {
       list() {
@@ -94,19 +95,30 @@ angular
         const index = lodash.findIndex(groupsObj.groups.group, group);
 
         if(Array.isArray(groupsObj.groups.group[index].page)) {
+
           groupsObj.groups.group[index].page.push({
             _name: pageName,
-            _position: 'gorny'
+            _position: defaultGroupPosition
           })
         } else {
           const tmp = groupsObj.groups.group[index].page;
           groupsObj.groups.group[index].page = [tmp, {
             _name: pageName,
-            _position: 'gorny'
+            _position: defaultGroupPosition
           }]
         }
+      },
+      removeGroupFromPage(group, pageName) {
+        const index = lodash.findIndex(groupsObj.groups.group, group);
 
-        console.log(groupsObj);
+        if(Array.isArray(groupsObj.groups.group[index].page)) {
+          if(groupsObj.groups.group[index].page.length === 2) {
+            lodash.remove(groupsObj.groups.group[index].page, {_name: pageName});
+            groupsObj.groups.group = groupsObj.groups.group[0];
+          }
+        } else {
+          groupsObj.groups.group[index].page._name = '';
+        }
       }
     }
   }]);

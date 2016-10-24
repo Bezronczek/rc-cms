@@ -1,0 +1,18 @@
+{
+  "max": {
+
+  },
+  "min": {
+    "maxWidth": 600,
+    "maxHeight": 290
+  },
+  "preview": {
+    "maxWidth": 300,
+    "maxHeight": 90
+  },
+  "outputFolder": "",
+  "gallery": {
+    "minSquare": 200,
+    "maxSquare": 240
+  }
+}

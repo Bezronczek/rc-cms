@@ -57,6 +57,40 @@ li.list-group-item.active > a {
     background-color: white;
 }
 
-.btn-primary-flat {
+.drop-box {
+    background: #ddd;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    border: 1px dashed black;
+}
 
+.dragover {
+    border: 2px dashed #337ab7;
+    opacity: 0.3;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.photos-draggable {
+    min-height: 700px;
+}
+
+.photo-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.photo-wrapper > .glyphicon-remove {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.photo-wrapper:hover > .glyphicon-remove {
+    display: inline-block;
+}
+
+.color-white {
+    color: #FF753A !important;
 }
