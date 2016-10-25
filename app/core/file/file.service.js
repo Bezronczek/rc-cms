@@ -417,6 +417,10 @@ angular
         resolve();
       });
 
+    },
+    exportXML() {
+      let data = angular.copy(filesObj);
+      return x2js.json2xml_str(data);
     }
   }
 

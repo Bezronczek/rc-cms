@@ -2,19 +2,23 @@
   <div class="panel-heading panel-heading-page" data-toggle="collapse"
        data-target="#Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent"
        aria-expanded="true" aria-controls="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
-        <span class="h4">
-          Grupa: {{$ctrl.group._name}} | {{$ctrl.name}}
-        </span>
+    <span class="glyphicon glyphicon-chevron-up move-element" ng-click="$ctrl.moveGroupUp(); $event.stopPropagation()"></span>
+    <span class="glyphicon glyphicon-chevron-down move-element" ng-click="$ctrl.moveGroupDown(); $event.stopPropagation()"></span>
+    <span class="h4">Grupa: {{$ctrl.group._name}}</span>
+    <!--<button class="btn btn-default" ng-click="$ctrl.moveGroupUp(); $event.stopPropagation()">Gora</button>-->
+    <!--<button class="btn btn-default" ng-click="$ctrl.moveGroupDown(); $event.stopPropagation()">Dol</button>-->
     <a href="" ng-click="$ctrl.removeGroupFromPage()"><span class="glyphicon glyphicon-remove pull-right"></span></a>
   </div>
   <div class="panel-body collapse" id="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
 
     <div class="panel panel-default">
+
       <div class="panel-heading panel-heading-page" data-toggle="collapse"
            data-target="#Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings"
            aria-expanded="true" aria-controls="Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings">
         <span>Ustawienia</span>
       </div>
+
       <div class="panel-body collapse" id="Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings">
 
 

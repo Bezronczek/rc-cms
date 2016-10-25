@@ -58,8 +58,9 @@
 <!--GRUPY-->
 <div class="groups-container">
   <!--filter: {page: {_name: $ctrl.page._action}}-->
-  <div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | page: $ctrl.page._action">
-    <group group="group" name="$ctrl.page._action"></group>
+  <!--<div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | page: $ctrl.page._action">-->
+  <div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.getFilteredModel($ctrl.filteredModel, $ctrl.groups, $ctrl.page._action)">
+    <group group="group" name="$ctrl.page._action" on-move-up="$ctrl.moveGroupUp(group)" on-move-down="$ctrl.moveGroupDown(group)"></group>
   </div>
 </div>
 

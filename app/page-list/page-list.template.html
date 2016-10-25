@@ -4,9 +4,9 @@
       <div class="row">
         <div class="panel panel-default top15">
           <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{page._action}}Details"
-               aria-expanded="true" aria-controls="{{page.action}}Groups"
-               ng-click="panelIconToggle === 'glyphicon-menu-up' ? panelIconToggle = 'glyphicon-menu-down' : panelIconToggle = 'glyphicon-menu-up'">
-            <span class="glyphicon" ng-class="panelIconToggle"></span>
+               aria-expanded="true" aria-controls="{{page.action}}Groups">
+            <span class="glyphicon glyphicon-chevron-up move-element" ng-click="$ctrl.movePageUp(); $event.stopPropagation()"></span>
+            <span class="glyphicon glyphicon-chevron-down move-element" ng-click="$ctrl.movePageDown(); $event.stopPropagation()"></span>
             <span class="h3" ng-class="{'text-danger': page._action === ''}">
             Strona: {{page._action === "" ? "&lt;uzupelnijakcje&gt;" : page._action}}
           </span>

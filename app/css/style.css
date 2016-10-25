@@ -91,6 +91,12 @@ li.list-group-item.active > a {
     display: inline-block;
 }
 
-.color-white {
+.color-orange {
     color: #FF753A !important;
 }
+
+.move-element {
+    /*margin-left: 10px;*/
+    margin-right: 10px;
+}
+

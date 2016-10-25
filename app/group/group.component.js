@@ -3,7 +3,9 @@ angular
   .component('group', {
     bindings: {
       group: "=",
-      name: "="
+      name: "=",
+      onMoveUp: "&",
+      onMoveDown: "&"
     },
     templateUrl: 'group/group.template.html',
     controller: ['Group', 'lodash', 'Photo', 'dragularService', '$element',
@@ -30,6 +32,14 @@ angular
 
         this.removeGroupData = function (data) {
           _.remove(this.group.data, data);
+        };
+
+        self.moveGroupUp = function() {
+          self.onMoveUp(self.group);
+        };
+
+        self.moveGroupDown = function() {
+          self.onMoveDown(self.group);
         };
 
         this.removeGroupFromPage = function () {

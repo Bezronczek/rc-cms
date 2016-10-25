@@ -9,8 +9,8 @@ angular
       pageListCtrl: "^pageList"
     },
     templateUrl: '/page-details/page-details.template.html',
-    controller: ['Group', 'dragularService', '$element', '$filter',
-      function (Group, dragularService, $element, $filter) {
+    controller: ['Group', 'dragularService', '$element', '$filter', 'lodash',
+      function (Group, dragularService, $element, $filter, _) {
 
         const self = this;
         self.groups = Group.list().groups.group;
@@ -21,12 +21,35 @@ angular
           [].push.apply(filteredModel, $filter('page')(items, filterQuery));
           return filteredModel;
         };
+
         //
         // dragularService('.groups-container', {
         //   nameSpace: 'groups',
         //   containersModel: self.groups,
         //   containersFilteredModel: self.filteredModel
         // });
+
+        self.moveGroupUp = function (group) {
+
+          let filteredIndex = _.findIndex(self.filteredModel, group);
+          let originalIndex = _.findIndex(self.groups, group);
+
+          if (filteredIndex === 0 || originalIndex === 0) return;
+
+          let destinationIndex = _.findIndex(self.groups, self.filteredModel[filteredIndex - 1]);
+          self.groups.splice(destinationIndex, 0, self.groups.splice(originalIndex, 1)[0]);
+
+        };
+
+        self.moveGroupDown = function (group) {
+          let filteredIndex = _.findIndex(self.filteredModel, group);
+          let originalIndex = _.findIndex(self.groups, group);
+
+          if (filteredIndex === self.filteredModel.length - 1 || originalIndex === self.groups.length - 1) return;
+
+          let destinationIndex = _.findIndex(self.groups, self.filteredModel[filteredIndex + 1]);
+          self.groups.splice(destinationIndex, 0, self.groups.splice(originalIndex, 1)[0]);
+        };
 
         this.onGroupSelect = function (group, pageName) {
           console.log(pageName);

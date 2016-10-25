@@ -2,10 +2,10 @@
      ngf-dragover-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
      accept="image/*" ngf-pattern="image/*" ng-change="$ctrl.fileChange($ctrl.files)" ngf-select-disabled="true">
   <div ng-repeat="photo in $ctrl.getFilteredModel($ctrl.filteredModel, $ctrl.photos, $ctrl.groupname)" class="col-lg-3">
-    <div class="photo-wrapper">
+    <div ng-if="$ctrl.getMinFile(photo)" class="photo-wrapper">
       <img class="img-thumbnail thumb center-block" ng-src="{{$ctrl.getMinFile(photo)._path}}"
            ng-click="$ctrl.openPhotoDetailModal(photo)">
-      <span class="glyphicon glyphicon-remove color-white" ng-click="$ctrl.removePhotoFromGroup(photo, $ctrl.groupname)"></span>
+      <span class="glyphicon glyphicon-remove color-orange" ng-click="$ctrl.removePhotoFromGroup(photo, $ctrl.groupname)"></span>
     </div>
 
   </div>
