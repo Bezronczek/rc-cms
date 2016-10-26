@@ -97,6 +97,16 @@ li.list-group-item.active > a {
 
 .move-element {
     /*margin-left: 10px;*/
-    margin-right: 10px;
+    /*margin-right: 10px;*/
+    padding-right: 10px;
 }
 
+.unassigned-group-selector {
+    color: grey;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.page-title {
+    text-transform: capitalize;
+}

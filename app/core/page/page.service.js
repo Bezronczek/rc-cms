@@ -125,6 +125,9 @@ angular
         });
         console.log(pagesObj.pages.page);
 
+      },
+      movePageUp() {
+
       }
     }
   }]);

@@ -4,7 +4,6 @@ angular
 
   const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
 <domains>
-	<domain name="testone" show="yes" url="cetra.com" redirect="http://cetra.info" />
 	<domain name="firstone" show="yes" url="cetra.info" redirect="asd" />
 	<domain name="soltone" show="yes" url="solofobia.cetra.info" redirect="asd" />
 	<domain name="projectone" show="yes" url="solofobia.pl" redirect="asd" />
@@ -33,10 +32,6 @@ angular
 
     getDomainDetails(name) {
       return lodash.find(domainsObj.domains.domain, {_name: name});
-    },
-    toLog() {
-      console.log('click2');
-      console.log(domainsObj);
     }
 
   }

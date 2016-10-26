@@ -25,6 +25,7 @@ angular
         };
 
         self.fileChange = function (files) {
+
           for (let file of files) {
             let nextId = Photo.getNextId();
             //<editor-fold desc="loadImage blob">
@@ -60,7 +61,7 @@ angular
 
             Upload.dataUrl(file)
               .then(url => {
-                self.tmpFiles.push({id: nextId, data:url})
+                self.tmpFiles.push({id: nextId, data: url})
               });
 
             upload.then(resp => {
@@ -70,13 +71,13 @@ angular
                 data: []
               };
 
-              File
-                .addFilesForPhoto(resp.data)
+              File.addFilesForPhoto(resp.data)
                 .then(() => {
                   return Photo.replaceTempPhoto(resp.data._id, newPhoto);
                 })
                 .then(() => {
                   _.remove(self.tmpFiles, {id: resp.data._id});
+                  // update filtered model
                 });
 
               // console.log(resp.data);
@@ -94,10 +95,10 @@ angular
                 return File.getFileForPhoto(photo);
               }
             }
-          })
+          });
         };
 
-        self.removePhotoFromGroup = function (photo, groupName) {
+        self.removePhotoFromGroup = function (photo) {
           photo.group._name = '';
         };
 
@@ -106,8 +107,7 @@ angular
         };
 
         self.getMinFile = function (photo) {
-          return File.getMinFileObject(photo);;
+          return File.getMinFileObject(photo);
         };
-
       }]
   });

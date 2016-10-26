@@ -48,7 +48,7 @@ angular.module('cms')
         },
         {
           name: 'photos-view.all',
-          url: '/photos/all',
+          url: '/all',
           views: {
             photos: {
               component: 'photosList'

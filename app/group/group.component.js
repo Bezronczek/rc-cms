@@ -8,54 +8,58 @@ angular
       onMoveDown: "&"
     },
     templateUrl: 'group/group.template.html',
-    controller: ['Group', 'lodash', 'Photo', 'dragularService', '$element',
-      function (Group, _, Photo, dragularService, $element) {
-        // console.log(this.group);
-        // this.photos = Photo.getPhotosForGroup(this.group._name);
+    controller: ['Group', 'lodash', 'Photo',
+      function (Group, _, Photo) {
 
         const self = this;
 
-        this.addGroupData = function () {
+        self.addGroupData = function () {
 
-          console.log(this.group);
+          console.log(self.group);
 
-          if (!this.group.data) {
-            this.group.data = [];
+          if (!self.group.data) {
+            self.group.data = [];
           }
 
-          this.group.data.push({
+          self.group.data.push({
             _lang: '',
             _url: '',
             _title: ''
           });
         };
 
-        this.removeGroupData = function (data) {
-          _.remove(this.group.data, data);
+        self.removeGroupData = function (data) {
+          _.remove(self.group.data, data);
         };
 
-        self.moveGroupUp = function() {
+        self.moveGroupUp = function () {
           self.onMoveUp(self.group);
         };
 
-        self.moveGroupDown = function() {
+        self.moveGroupDown = function () {
           self.onMoveDown(self.group);
         };
 
-        this.removeGroupFromPage = function () {
+        self.removeGroupFromPage = function () {
           // Group.removeGroupFromPage(self.group, self.name);
-          if (Array.isArray(this.group.page)) {
-            if(this.group.page.length === 2) {
-              _.remove(this.group.page, {_name: self.name});
-              this.group.page = this.group.page[0];
+          if (Array.isArray(self.group.page)) {
+            if (self.group.page.length === 2) {
+              _.remove(self.group.page, {_name: self.name});
+              self.group.page = self.group.page[0];
             } else {
-              _.remove(this.group.page, {_name: self.name});
+              _.remove(self.group.page, {_name: self.name});
             }
           } else {
-            this.group.page._name = '';
+            self.group.page._name = '';
           }
-          console.log(this.group);
+          console.log(self.group);
+        };
+
+        self.deleteGroup = function () {
+          Group.delete(self.group);
+          Photo.deleteGroup(self.group);
         }
+
       }]
 
   });

@@ -1,7 +1,9 @@
 <div class="col-lg-2">
   <div class="row">
     <div class="container-fluid">
+      <button class="btn btn-primary form-control bot15" ui-sref="domains">Przejdz do domen</button>
       <div class="list-group draggable">
+
         <a href="" ui-sref="photos-view.all" ui-sref-active="active" class="list-group-item">
           Wszystkie
         </a>
@@ -17,9 +19,9 @@
 
       <div class="input-group">
       <span class="input-group-btn">
-        <button class="btn btn-primary" ng-click="$ctrl.addDomain(domainName)">Dodaj</button>
+        <button class="btn btn-primary" ng-click="$ctrl.addGroup(groupName)">Dodaj</button>
       </span>
-        <input type="text" class="form-control" placeholder="Nowa domena" ng-model="domainName">
+        <input type="text" class="form-control" placeholder="Nowa groupa" ng-model="groupName">
       </div>
     </div>
 

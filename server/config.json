@@ -10,7 +10,7 @@
     "maxWidth": 300,
     "maxHeight": 90
   },
-  "outputFolder": "",
+  "dataFolder": "D:\\Projekty\\Web\\rc-cms\\data",
   "gallery": {
     "minSquare": 200,
     "maxSquare": 240

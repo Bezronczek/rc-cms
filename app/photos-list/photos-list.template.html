@@ -5,7 +5,7 @@
     <div ng-if="$ctrl.getMinFile(photo)" class="photo-wrapper">
       <img class="img-thumbnail thumb center-block" ng-src="{{$ctrl.getMinFile(photo)._path}}"
            ng-click="$ctrl.openPhotoDetailModal(photo)">
-      <span class="glyphicon glyphicon-remove color-orange" ng-click="$ctrl.removePhotoFromGroup(photo, $ctrl.groupname)"></span>
+      <span ng-if="$ctrl.groupname.length > 0" class="glyphicon glyphicon-remove color-orange" ng-click="$ctrl.removePhotoFromGroup(photo, $ctrl.groupname)"></span>
     </div>
 
   </div>

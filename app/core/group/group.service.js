@@ -1,6 +1,6 @@
 angular
   .module('core.group')
-  .factory('Group', ['lodash', 'x2js', function (lodash, x2js) {
+  .factory('Group', ['lodash', 'x2js', function (_, x2js) {
 
     //region Groups XML
     const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
@@ -89,10 +89,10 @@ angular
         return groupsObj;
       },
       findByPageName(pageName) {
-        return lodash.filter(groupsObj.groups.group, {page: {_name: pageName}});
+        return _.filter(groupsObj.groups.group, {page: {_name: pageName}});
       },
       addGroupToPage(group, pageName) {
-        const index = lodash.findIndex(groupsObj.groups.group, group);
+        const index = _.findIndex(groupsObj.groups.group, group);
 
         if(Array.isArray(groupsObj.groups.group[index].page)) {
 
@@ -101,24 +101,31 @@ angular
             _position: defaultGroupPosition
           })
         } else {
-          const tmp = groupsObj.groups.group[index].page;
-          groupsObj.groups.group[index].page = [tmp, {
-            _name: pageName,
-            _position: defaultGroupPosition
-          }]
+          if(groupsObj.groups.group[index].page._name === "") {
+            groupsObj.groups.group[index].page._name = pageName;
+          } else {
+            const tmp = groupsObj.groups.group[index].page;
+            groupsObj.groups.group[index].page = [tmp, {
+              _name: pageName,
+              _position: defaultGroupPosition
+            }]
+          }
         }
       },
       removeGroupFromPage(group, pageName) {
-        const index = lodash.findIndex(groupsObj.groups.group, group);
+        const index = _.findIndex(groupsObj.groups.group, group);
 
         if(Array.isArray(groupsObj.groups.group[index].page)) {
           if(groupsObj.groups.group[index].page.length === 2) {
-            lodash.remove(groupsObj.groups.group[index].page, {_name: pageName});
+            _.remove(groupsObj.groups.group[index].page, {_name: pageName});
             groupsObj.groups.group = groupsObj.groups.group[0];
           }
         } else {
           groupsObj.groups.group[index].page._name = '';
         }
+      },
+      delete(group) {
+        _.remove(groupsObj.groups.group, group);
       }
     }
   }]);

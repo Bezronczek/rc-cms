@@ -70,11 +70,11 @@
 <div ng-if="$ctrl.page._photo === 'yes'" class="container-fluid">
   <div class="col-lg-2">
     <ui-select on-select="$ctrl.onGroupSelect($item, $ctrl.page._action)" ng-model="$selected" theme="bootstrap">
-      <ui-select-match placeholder="Dodaj grupe do strony">
+      <ui-select-match placeholder="Przenies grupe">
         <span ng-bind="$select.selected._name"></span>
       </ui-select-match>
-      <ui-select-choices repeat="group in ($ctrl.groups | filter: {page: {_name: '!' + $ctrl.page._action}} | filter: {_name: $select.search})">
-        <span ng-bind="group._name"></span>
+      <ui-select-choices repeat="group in ($ctrl.groups | filter: {_name: $select.search})">
+        <span ng-class="{'unassigned-group-selector': group.page._name == '' }" ng-bind="group._name"></span>
       </ui-select-choices>
     </ui-select>
   </div>

@@ -6,8 +6,14 @@ angular
     },
     templateUrl: 'domain-view/domain-view.template.html',
     controller: ['$state', 'dragularService', '$element',
-      function DomainListController($state) {
+      function DomainListController($state, dragularService) {
 
+        const self = this;
+
+        dragularService('.draggable', {
+          container: self.domains,
+          nameSpace: 'domains'
+        });
 
         this.addDomain = function (name) {
           this.domains.push({

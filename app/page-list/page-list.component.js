@@ -6,16 +6,40 @@ angular
       groups: "="
     },
     templateUrl: 'page-list/page-list.template.html',
-    controller: ['Page', '$stateParams', '$state', 'lodash', 'dragularService', '$scope', '$element',
-      function (Page, $stateParams, $state, _, dragularService, $scope) {
+    controller: ['Page', '$stateParams', '$state', 'lodash',
+      function (Page, $stateParams, $state, _) {
 
         const self = this;
 
-        // dragularService('.pages-list-draggable', {
-        //   scope: $scope,
-        //   containersModel: self.pages,
-        //   nameSpace: 'pages'
-        // });
+        this.movePageUp = function(page, index) {
+          let pageList = Page.list().pages.page;
+          const originalIndex = _.findIndex(pageList, page);
+
+          if(index === 0 || originalIndex === 0) return;
+
+          let destinationIndex = _.findIndex(pageList, self.pages[index - 1]);
+          pageList.splice(destinationIndex, 0, pageList.splice(originalIndex, 1)[0]);
+          self.pages = Page.listByDomainName($stateParams.domainName);
+        };
+
+        this.movePageDown = function(page, index) {
+          let pageList = Page.list().pages.page;
+          const originalIndex = _.findIndex(pageList, page);
+
+          if(index === self.pages.length - 1 || originalIndex === pageList.length - 1) return;
+
+          let destinationIndex = _.findIndex(pageList, self.pages[index + 1]);
+          pageList.splice(destinationIndex, 0, pageList.splice(originalIndex, 1)[0]);
+          self.pages = Page.listByDomainName($stateParams.domainName);
+        };
+
+
+        this.log = function (index) {
+          self.list = Page.list();
+
+
+          console.log(index);
+        };
 
         this.addPage = function () {
           Page.addPage({
@@ -25,7 +49,7 @@ angular
             _show: 'no'
           });
 
-          $state.reload();
+          self.pages = Page.listByDomainName($stateParams.domainName);
         };
       }]
   });

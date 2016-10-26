@@ -7,11 +7,10 @@ angular
       resolve: "="
     },
     templateUrl: 'photo-detail/photo-detail.template.html',
-    controller: ['lodash', 'Group', '$state',
-      function (_, Group, $state) {
-        console.log(this.resolve.photo);
-        console.log(this.resolve.files);
-        console.log(this.resolve);
+    controller: ['lodash', 'Group', '$state', 'Photo', 'File',
+      function (_, Group, $state, Photo, File) {
+
+        const self = this;
 
         this.groups = Group.list().groups.group;
 
@@ -20,10 +19,20 @@ angular
           $state.reload()
         };
 
+        this.deletePhoto = function(photo) {
+          Photo.delete(photo)
+            .then(photo => {
+              return File.delete(photo);
+            })
+            .then(() => {
+              self.close({$value: 'deleted'});
+            });
+        };
+
         this.addPhotoData = function () {
 
           if (!this.resolve.photo.data) {
-            this.resolve.photo.data = [];
+            self.resolve.photo.data = [];
           }
 
           this.resolve.photo.data.push({

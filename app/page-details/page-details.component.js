@@ -42,12 +42,12 @@ angular
         };
 
         self.moveGroupDown = function (group) {
-          let filteredIndex = _.findIndex(self.filteredModel, group);
-          let originalIndex = _.findIndex(self.groups, group);
+          let filteredIndex = self.filteredModel.indexOf(group); //_.findIndex(self.filteredModel, group);
+          let originalIndex = self.groups.indexOf(group); //_.findIndex(self.groups, group);
 
           if (filteredIndex === self.filteredModel.length - 1 || originalIndex === self.groups.length - 1) return;
 
-          let destinationIndex = _.findIndex(self.groups, self.filteredModel[filteredIndex + 1]);
+          let destinationIndex =  self.groups.indexOf(self.filteredModel[filteredIndex + 1]); //_.findIndex(self.groups, self.filteredModel[filteredIndex + 1]);
           self.groups.splice(destinationIndex, 0, self.groups.splice(originalIndex, 1)[0]);
         };
 

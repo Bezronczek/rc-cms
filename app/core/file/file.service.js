@@ -416,7 +416,12 @@ angular
         filesObj.files.file.push(file);
         resolve();
       });
-
+    },
+    delete(photo) {
+      return new Promise(resolve => {
+        _.remove(filesObj.files.file, {id: photo._id});
+        resolve();
+      });
     },
     exportXML() {
       let data = angular.copy(filesObj);

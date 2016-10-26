@@ -9,6 +9,25 @@ angular
       function ($state) {
         console.log(this.groups);
 
+        this.addGroup = function (name) {
+          this.groups.push({
+            _name: name,
+            data: [{
+              _lang: 'en',
+              _title: '',
+              _url: ''
+            }, {
+              _lang: 'pl',
+              _title: '',
+              _url: ''
+            }],
+            page: {
+              _name: '',
+              _position: 'dolny'
+            }
+          });
+        };
+
         this.addDomain = function (name) {
           this.domains.push({
             _name: name,
