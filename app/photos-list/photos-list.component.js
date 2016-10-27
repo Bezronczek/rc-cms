@@ -5,8 +5,8 @@ angular
       groupname: "<"
     },
     templateUrl: 'photos-list/photos-list.template.html',
-    controller: ['File', '$uibModal', 'dragularService', '$element', 'Photo', '$filter', 'Upload', 'lodash',
-      function (File, $uibModal, dragularService, $element, Photo, $filter, Upload, _) {
+    controller: ['File', '$uibModal', 'dragularService', '$element', 'Photo', '$filter', 'Upload', 'lodash', '$scope',
+      function (File, $uibModal, dragularService, $element, Photo, $filter, Upload, _, $scope) {
 
         const self = this;
         self.photos = Photo.list();
@@ -14,8 +14,14 @@ angular
         self.filteredModel = [];
 
         dragularService($element.children(), {
+          scope: $scope,
           containersModel: self.photos,
           containersFilteredModel: self.filteredModel
+        });
+
+        $scope.$on('dragulardrop', () => {
+          Photo.save();
+          File.save();
         });
 
         self.getFilteredModel = function (filteredModel, items, filterQuery) {

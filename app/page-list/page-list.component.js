@@ -11,7 +11,11 @@ angular
 
         const self = this;
 
-        this.movePageUp = function(page, index) {
+        self.allPages = Page.list().pages.page;
+
+        self.domainName = $stateParams.domainName;
+
+        self.movePageUp = function(page, index) {
           let pageList = Page.list().pages.page;
           const originalIndex = _.findIndex(pageList, page);
 
@@ -20,9 +24,11 @@ angular
           let destinationIndex = _.findIndex(pageList, self.pages[index - 1]);
           pageList.splice(destinationIndex, 0, pageList.splice(originalIndex, 1)[0]);
           self.pages = Page.listByDomainName($stateParams.domainName);
+
+          Page.save();
         };
 
-        this.movePageDown = function(page, index) {
+        self.movePageDown = function(page, index) {
           let pageList = Page.list().pages.page;
           const originalIndex = _.findIndex(pageList, page);
 
@@ -31,25 +37,40 @@ angular
           let destinationIndex = _.findIndex(pageList, self.pages[index + 1]);
           pageList.splice(destinationIndex, 0, pageList.splice(originalIndex, 1)[0]);
           self.pages = Page.listByDomainName($stateParams.domainName);
+
+          Page.save();
         };
 
-
-        this.log = function (index) {
-          self.list = Page.list();
-
-
-          console.log(index);
-        };
-
-        this.addPage = function () {
+        self.addPage = function () {
           Page.addPage({
             _action: '',
             _domain: $stateParams.domainName,
             _photo: 'yes',
-            _show: 'no'
+            _show: 'no',
+            data: [{
+              _lang: 'pl',
+              _url: '',
+              _title: '',
+              _desc: ''
+            },{
+              _lang: 'en',
+              _url: '',
+              _title: '',
+              _desc: ''
+            }]
           });
 
           self.pages = Page.listByDomainName($stateParams.domainName);
         };
+
+        self.movePageToDomain = function(page, domainName) {
+          console.log(page, domainName);
+          Page.moveToDomain(page, domainName);
+          $state.reload();
+        };
+
+        self.deletePage = function(page) {
+          Page.delete(page);
+        }
       }]
   });

@@ -3,16 +3,17 @@ angular
   .component('pageDetails', {
     bindings: {
       page: "=",
+      onDelete: '&'
       // groups: "="
     },
     require: {
       pageListCtrl: "^pageList"
     },
     templateUrl: '/page-details/page-details.template.html',
-    controller: ['Group', 'dragularService', '$element', '$filter', 'lodash',
-      function (Group, dragularService, $element, $filter, _) {
-
+    controller: ['Group', '$element', '$filter', 'lodash', '$state',
+      function (Group, $element, $filter, _, $state) {
         const self = this;
+
         self.groups = Group.list().groups.group;
         self.filteredModel = [];
 
@@ -22,12 +23,7 @@ angular
           return filteredModel;
         };
 
-        //
-        // dragularService('.groups-container', {
-        //   nameSpace: 'groups',
-        //   containersModel: self.groups,
-        //   containersFilteredModel: self.filteredModel
-        // });
+
 
         self.moveGroupUp = function (group) {
 
@@ -38,7 +34,7 @@ angular
 
           let destinationIndex = _.findIndex(self.groups, self.filteredModel[filteredIndex - 1]);
           self.groups.splice(destinationIndex, 0, self.groups.splice(originalIndex, 1)[0]);
-
+          Group.save();
         };
 
         self.moveGroupDown = function (group) {
@@ -49,21 +45,16 @@ angular
 
           let destinationIndex =  self.groups.indexOf(self.filteredModel[filteredIndex + 1]); //_.findIndex(self.groups, self.filteredModel[filteredIndex + 1]);
           self.groups.splice(destinationIndex, 0, self.groups.splice(originalIndex, 1)[0]);
+          Group.save();
         };
 
         this.onGroupSelect = function (group, pageName) {
-          console.log(pageName);
           Group.addGroupToPage(group, pageName)
         };
 
         this.createEmptyGroup = function () {
-          this.groups.push({
-            _name: 'placeholder',
-            page: {
-              _name: this.page._action,
-              _position: 'gorny'
-            }
-          });
+
+          Group.create(this.page._action);
 
           console.log(this.groups);
         };
@@ -89,5 +80,11 @@ angular
         this.pageName = function (page) {
           return page._action
         };
+
+        self.deletePage = function(page) {
+          Group.deletePage(page);
+          self.onDelete(page);
+          $state.reload();
+        }
       }]
   });

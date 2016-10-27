@@ -11,8 +11,6 @@
   </div>
   <div class="panel-body collapse" id="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
 
-
-
     <div class="panel panel-default">
 
       <div class="panel-heading panel-heading-page" data-toggle="collapse"
@@ -24,10 +22,11 @@
       <div class="panel-body collapse" id="Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings">
 
 
-        <div>
+        <div class="form-inline">
           <label for="{{$ctrl.group._name}}NameInput">Nazwa grupy</label>
           <input id="{{$ctrl.group._name}}NameInput" type="text" ng-model-options="{updateOn: 'blur'}"
                  ng-model="$ctrl.group._name" class="form-control input-auto-width">
+          <button class="btn btn-danger pull-right" ng-click="$ctrl.deleteGroup()">Usun</button>
         </div>
 
         <div class="btn-group top15 bot15">
@@ -37,19 +36,19 @@
 
 
         <div ng-repeat="data in $ctrl.group.data" class="form-group language-group form-inline">
+          <label>Jezyk: </label>
           <input ng-model="data._lang" type="text" class="form-control group-form-control" placeholder="Jezyk">
+          <label>URL: </label>
           <input ng-model="data._url" type="text" class="form-control group-form-control" placeholder="URL">
+          <label>Tytul: </label>
           <input ng-model="data._title" type="text" class="form-control group-form-control" placeholder="Tytul">
           <a ng-click="$ctrl.removeGroupData(data)" href="">
-            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-remove color-orange"></span>
           </a>
         </div>
         <div>
           <button ng-click="$ctrl.addGroupData()" class="btn btn-primary">Dodaj dane</button>
         </div>
-
-
-        <button class="btn btn-danger pull-right" ng-click="$ctrl.deleteGroup()">Usun grupe</button>
       </div>
     </div>
 

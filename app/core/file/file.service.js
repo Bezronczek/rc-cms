@@ -13,6 +13,9 @@ angular
     }
 
     return {
+      save() {
+        localStorage.setItem('filesObject', JSON.stringify(filesObj));
+      },
       setFilesObject(obj) {
         return new Promise(resolve => {
           filesObj = obj;
@@ -42,12 +45,14 @@ angular
       addFilesForPhoto(file) {
         return new Promise(resolve => {
           filesObj.files.file.push(file);
+          localStorage.setItem('filesObject', JSON.stringify(filesObj));
           resolve();
         });
       },
       delete(photo) {
         return new Promise(resolve => {
           _.remove(filesObj.files.file, {id: photo._id});
+          localStorage.setItem('filesObject', JSON.stringify(filesObj));
           resolve();
         });
       },

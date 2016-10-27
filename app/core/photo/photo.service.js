@@ -14,6 +14,9 @@ angular
       }
 
       return {
+        save() {
+          localStorage.setItem('photosObject', JSON.stringify(photosObj));
+        },
         setPhotosObject(obj) {
           return new Promise(resolve => {
             photosObj = obj;
@@ -40,12 +43,14 @@ angular
           return new Promise(resolve => {
             let index = _.findIndex(photosObj.photos.photo, {_id: photoId});
             photosObj.photos.photo.splice(index, 1, photo);
+            localStorage.setItem('photosObject', JSON.stringify(photosObj));
             resolve();
           });
         },
         newPhoto(photo) {
           return new Promise(resolve => {
             photosObj.photos.photo.push(photo);
+            localStorage.setItem('photosObject', JSON.stringify(photosObj));
             resolve();
           });
 
@@ -63,24 +68,29 @@ angular
               _name: group
             }
           });
+          this.save();
         },
         deleteGroup(group) {
           _.each(photosObj.photos.photo, photo => {
             if (photo.group._name === group._name) {
               photo.group._name = ''
             }
-          })
+          });
+          this.save();
         },
         delete(photo) {
           return new Promise((resolve, reject) => {
             $http.delete(`/photo/${photo._id}`).then(() => {
               _.remove(photosObj.photos.photo, photo);
+              localStorage.setItem('photosObject', JSON.stringify(photosObj));
               resolve(photo);
             }, err => {
               reject(err.stack || err);
               console.error(err.stack || err);
             })
           });
+
+
         },
         exportToXML() {
           const xmlString = x2js.json2xml_str(angular.copy(photosObj));

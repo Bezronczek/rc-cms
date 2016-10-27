@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{$ctrl.page._action}}PageSettings"
-    aria-expanded="true" aria-controls="{{$ctrl.page._action}}PageSettings">
+       aria-expanded="true" aria-controls="{{$ctrl.page._action}}PageSettings">
     <span>Ustawienia</span>
   </div>
   <div class="panel-body collapse" id="{{$ctrl.page._action}}PageSettings">
@@ -10,35 +10,39 @@
       <label uib-btn-checkbox btn-checkbox-true="'yes'" btn-checkbox-false="'no'" ng-model="$ctrl.page._show"
              class="btn btn-primary">Show</label>
     </div>
+    <button class="btn btn-danger pull-right" ng-click="$ctrl.deletePage($ctrl.page)">Usun</button>
     <br/>
+    <div class="form-inline top15">
+      <label for="{{$ctrl.page._action}}Action">Akcja: </label>
+      <input id="{{$ctrl.page._action}}Action" type="text" class="form-control input-auto-width" placeholder="action"
+             ng-model="$ctrl.page._action">
 
-    <label for="{{$ctrl.page._action}}Action">Akcja: </label>
-    <input id="{{$ctrl.page._action}}Action" type="text" class="form-control input-auto-width" placeholder="action"
-           ng-model="$ctrl.page._action">
-
-    <label for="{{$ctrl.page._action}}Domain">Domena: </label>
-    <input id="{{$ctrl.page._action}}Domain" type="text" class="form-control input-auto-width" placeholder="domain"
-           ng-model="$ctrl.page._domain">
+      <label for="{{$ctrl.page._action}}Domain">Domena: </label>
+      <input id="{{$ctrl.page._action}}Domain" type="text" class="form-control input-auto-width" placeholder="domain"
+             ng-model="$ctrl.page._domain">
+    </div>
 
     <div ng-repeat="data in $ctrl.page.data" class="well top15">
       <div class="form-group">
         <!--_lang-->
-        <label ng-class="{'text-danger': data._lang===''}"
-               for="{{$ctrl.page._action}}PageDataLang{{data._lang}}">Jezyk:</label>
-        <input id="{{$ctrl.page._action}}PageDataLang{{data._lang}}" ng-model="data._lang" type="text"
-               class="form-control input-auto-width" placeholder="lang"/>
+        <div class="form-inline">
+          <label ng-class="{'text-danger': data._lang===''}"
+                 for="{{$ctrl.page._action}}PageDataLang{{data._lang}}">Jezyk:</label>
+          <input id="{{$ctrl.page._action}}PageDataLang{{data._lang}}" ng-model="data._lang" type="text"
+                 class="form-control input-auto-width" placeholder="lang"/>
 
-        <!--_url-->
-        <label ng-class="{'text-danger': data._url===''}"
-               for="{{$ctrl.page._action}}PageDataLang{{data._url}}">Url:</label>
-        <input id="{{$ctrl.page._action}}PageDataLang{{data._url}}" ng-model="data._url" type="text"
-               class="form-control input-auto-width" placeholder="url"/>
+          <!--_url-->
+          <label ng-class="{'text-danger': data._url===''}"
+                 for="{{$ctrl.page._action}}PageDataLang{{data._url}}">Url:</label>
+          <input id="{{$ctrl.page._action}}PageDataLang{{data._url}}" ng-model="data._url" type="text"
+                 class="form-control input-auto-width" placeholder="url"/>
 
-        <!--_title-->
-        <label ng-class="{'text-danger': data._title===''}" for="{{$ctrl.page._action}}PageDataLang{{data._title}}">Tytul:</label>
-        <input id="{{$ctrl.page._action}}PageDataLang{{data._title}}" ng-model="data._title" type="text"
-               class="form-control " placeholder="title"/>
+          <!--_title-->
+          <label ng-class="{'text-danger': data._title===''}" for="{{$ctrl.page._action}}PageDataLang{{data._title}}">Tytul:</label>
+          <input id="{{$ctrl.page._action}}PageDataLang{{data._title}}" ng-model="data._title" type="text"
+                 class="form-control input-auto-width" placeholder="title"/>
 
+        </div>
         <!--_desc-->
         <label ng-class="{'text-danger': data._desc===''}"
                for="{{$ctrl.page._action}}PageDataLang{{data._desc}}">Opis:</label>
@@ -59,8 +63,10 @@
 <div class="groups-container">
   <!--filter: {page: {_name: $ctrl.page._action}}-->
   <!--<div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.groups | page: $ctrl.page._action">-->
-  <div ng-if="$ctrl.page._photo === 'yes'" ng-repeat="group in $ctrl.getFilteredModel($ctrl.filteredModel, $ctrl.groups, $ctrl.page._action)">
-    <group group="group" name="$ctrl.page._action" on-move-up="$ctrl.moveGroupUp(group)" on-move-down="$ctrl.moveGroupDown(group)"></group>
+  <div ng-if="$ctrl.page._photo === 'yes'"
+       ng-repeat="group in $ctrl.getFilteredModel($ctrl.filteredModel, $ctrl.groups, $ctrl.page._action)">
+    <group group="group" name="$ctrl.page._action" on-move-up="$ctrl.moveGroupUp(group)"
+           on-move-down="$ctrl.moveGroupDown(group)"></group>
   </div>
 </div>
 
@@ -70,7 +76,7 @@
 <div ng-if="$ctrl.page._photo === 'yes'" class="container-fluid">
   <div class="col-lg-2">
     <ui-select on-select="$ctrl.onGroupSelect($item, $ctrl.page._action)" ng-model="$selected" theme="bootstrap">
-      <ui-select-match placeholder="Przenies grupe">
+      <ui-select-match placeholder="Dodaj grupe">
         <span ng-bind="$select.selected._name"></span>
       </ui-select-match>
       <ui-select-choices repeat="group in ($ctrl.groups | filter: {_name: $select.search})">

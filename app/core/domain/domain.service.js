@@ -14,6 +14,13 @@ angular
       }
 
       return {
+        save() {
+          return new Promise(resolve => {
+            console.log(domainsObj);
+            localStorage.setItem('domainsObject', JSON.stringify(domainsObj));
+            resolve();
+          })
+        },
         setDomainsObject(obj) {
           return new Promise(resolve => {
             domainsObj = obj;
@@ -26,18 +33,32 @@ angular
         },
 
         add(name) {
-          domainsObj.push({
-            name: name,
-            pages: []
-          })
+          domainsObj.domains.domain.push({
+            _name: name,
+            _redirect: '',
+            _show: 'no',
+            _url: ''
+          });
+
+          this.save();
         },
 
-        remove(name) {
-          _.remove(domainsObj, {
-            name: name
-          })
+        delete(domain) {
+          return new Promise((resolve, reject) => {
+            try {
+              console.log(domain);
+              _.remove(domainsObj.domains.domain, domain);
+              this.save();
+              resolve();
+            } catch (err) {
+              reject(err.stack || err);
+            }
+          });
         },
-
+        rename(domain, newName) {
+          domain._name = newName;
+          this.save();
+        },
         getDomainDetails(name) {
           return _.find(domainsObj.domains.domain, {_name: name});
         },

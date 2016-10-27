@@ -1,1 +1,1 @@
-angular.module('domainDetails', ['core.domain']);
+angular.module('domainDetails', ['core.domain', 'ui.bootstrap']);

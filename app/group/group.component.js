@@ -41,18 +41,17 @@ angular
         };
 
         self.removeGroupFromPage = function () {
-          // Group.removeGroupFromPage(self.group, self.name);
-          if (Array.isArray(self.group.page)) {
-            if (self.group.page.length === 2) {
-              _.remove(self.group.page, {_name: self.name});
-              self.group.page = self.group.page[0];
-            } else {
-              _.remove(self.group.page, {_name: self.name});
-            }
-          } else {
-            self.group.page._name = '';
-          }
-          console.log(self.group);
+          Group.removeGroupFromPage(self.group, self.name);
+          // if (Array.isArray(self.group.page)) {
+          //   if (self.group.page.length === 2) {
+          //     _.remove(self.group.page, {_name: self.name});
+          //     self.group.page = self.group.page[0];
+          //   } else {
+          //     _.remove(self.group.page, {_name: self.name});
+          //   }
+          // } else {
+          //   self.group.page._name = '';
+          // }
         };
 
         self.deleteGroup = function () {

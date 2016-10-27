@@ -22,11 +22,25 @@ angular
           resolve();
         });
       },
+      save() {
+        localStorage.setItem('groupsObject', JSON.stringify(groupsObj));
+      },
       list() {
         return groupsObj;
       },
       findByPageName(pageName) {
         return _.filter(groupsObj.groups.group, {page: {_name: pageName}});
+      },
+      create(pageName) {
+        groupsObj.groups.group.push({
+          _name: '',
+          page: {
+            _name: pageName,
+            _position: defaultGroupPosition
+          }
+        });
+
+        this.save();
       },
       addGroupToPage(group, pageName) {
         const index = _.findIndex(groupsObj.groups.group, group);
@@ -48,21 +62,36 @@ angular
             }]
           }
         }
+        this.save();
       },
-      removeGroupFromPage(group, pageName) {
-        const index = _.findIndex(groupsObj.groups.group, group);
 
-        if (Array.isArray(groupsObj.groups.group[index].page)) {
-          if (groupsObj.groups.group[index].page.length === 2) {
-            _.remove(groupsObj.groups.group[index].page, {_name: pageName});
-            groupsObj.groups.group = groupsObj.groups.group[0];
+      removeGroupFromPage(group, pageName) {
+        if(Array.isArray(group.page)) {
+          if(group.page.length === 2) {
+            _.remove(group.page, {_name: pageName});
+            group.page = group.page[0];
+          } else {
+            _.remove(group.page, {_name: pageName})
           }
         } else {
-          groupsObj.groups.group[index].page._name = '';
+          group.page._name = '';
         }
+
+        this.save();
+
       },
+
       delete(group) {
         _.remove(groupsObj.groups.group, group);
+      },
+      deletePage(page) {
+        _.each(groupsObj.groups.group, group => {
+          if(group.page._name === page._action) {
+            group.page._name = ''
+          }
+        });
+
+        this.save();
       },
       exportToXML() {
         const xmlString = x2js.json2xml_str(angular.copy(groupsObj));

@@ -1,11 +1,23 @@
 <div class="container-fluid">
-  <div class="col-lg-12">
-    <h4>Ustawienia dla: {{$ctrl.domainDetails._name}}</h4>
-    <div class="row form-inline">
-      <input ng-blur="$ctrl.nameChanged($event)" class="form-control input-auto-width" type="text" ng-model-options="{updateOn: 'blur'}" ng-model="$ctrl.domainDetails._name" />
-      <input class="form-control input-auto-width" type="text" ng-model="$ctrl.domainDetails._redirect" />
-      <input class="form-control input-auto-width" type="text" ng-model="$ctrl.domainDetails._url" />
-      <input class="checkbox" type="checkbox" ng-model="$ctrl.domainDetails._show" ng-true-value="'yes'" ng-false-value="'no'" /> Widoczna
+
+  <div ng-if="$ctrl.domainDetails._name" class="panel panel-primary">
+    <div class="panel-heading" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
+      <span class="text-capitalize">{{$ctrl.domainDetails._name}}</span>
+    </div>
+    <div class="panel-body domain-details" uib-collapse="$ctrl.isCollapsed">
+      <div class="row form-inline">
+        <label>Nazwa</label>
+        <input ng-blur="$ctrl.nameChanged(domainName)" class="form-control input-auto-width" type="text"
+               ng-init="domainName = $ctrl.domainDetails._name+''" ng-model="domainName"/>
+        <label>Przekierowanie</label>
+        <input class="form-control input-auto-width" type="text" ng-model="$ctrl.domainDetails._redirect"/>
+        <label>URL</label>
+        <input class="form-control input-auto-width" type="text" ng-model="$ctrl.domainDetails._url"/>
+        <input class="checkbox" type="checkbox" ng-model="$ctrl.domainDetails._show" ng-true-value="'yes'"
+               ng-false-value="'no'"/> Widoczna
+        <button class="btn btn-danger pull-right" ng-click="$ctrl.deleteDomain()">Usun</button>
+      </div>
     </div>
   </div>
+
 </div>
