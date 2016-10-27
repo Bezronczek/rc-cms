@@ -6,7 +6,11 @@ angular.module('cms')
           name: 'domains',
           url: '/',
           // template: "<domain-list domains='$resolve.domains'></domain-list>",
-          component: 'domainView',
+          views: {
+            root: {
+              component: 'domainView'
+            }
+          },
           resolve: {
             domains: function (Domain) {
               return Domain.list()
@@ -39,7 +43,11 @@ angular.module('cms')
         {
           name: 'photos-view',
           url: '/photos',
-          component: 'photosView',
+          views: {
+            root: {
+              component: 'photosView'
+            }
+          },
           resolve: {
             groups: function (Group) {
               return Group.list().groups.group
@@ -69,11 +77,20 @@ angular.module('cms')
             }
           },
           resolve: {
-            photos: function(Photo, $stateParams) {
+            photos: function (Photo, $stateParams) {
               return Photo.getPhotosForGroup($stateParams.groupName);
             },
             groupname: function ($stateParams) {
               return $stateParams.groupName
+            }
+          }
+        },
+        {
+          name: 'xml-loader',
+          url: '/xml-manager',
+          views: {
+            root: {
+              component: 'xmlLoader'
             }
           }
         }

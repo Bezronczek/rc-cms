@@ -1,38 +1,49 @@
 angular
-.module('core.domain')
-.factory('Domain', ['lodash', 'x2js', function(lodash, x2js) {
+  .module('core.domain')
+  .factory('Domain', ['lodash', 'x2js',
+    function (_, x2js) {
 
-  const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
-<domains>
-	<domain name="firstone" show="yes" url="cetra.info" redirect="asd" />
-	<domain name="soltone" show="yes" url="solofobia.cetra.info" redirect="asd" />
-	<domain name="projectone" show="yes" url="solofobia.pl" redirect="asd" />
-</domains>`;
+      let domainsObj = {
+        domains: {
+          domain: []
+        }
+      };
 
-  // Obiekty domen umieszczone sa w tablicy domainObj.domains.domain
-  const domainsObj = x2js.xml_str2json(xmlString);
-  
-  return {
-    list() {
-      return domainsObj.domains.domain;
-    },
+      if (localStorage.getItem('domainsObject')) {
+        domainsObj = JSON.parse(localStorage.getItem('domainsObject'));
+      }
 
-    add(name) {
-      domainsObj.push({
-        name: name,
-        pages: []
-      })
-    },
+      return {
+        setDomainsObject(obj) {
+          return new Promise(resolve => {
+            domainsObj = obj;
+            localStorage.setItem('domainsObject', JSON.stringify(domainsObj));
+            resolve();
+          })
+        },
+        list() {
+          return domainsObj.domains.domain;
+        },
 
-    remove(name) {
-      lodash.remove(domainsObj, {
-        name: name
-      })
-    },
+        add(name) {
+          domainsObj.push({
+            name: name,
+            pages: []
+          })
+        },
 
-    getDomainDetails(name) {
-      return lodash.find(domainsObj.domains.domain, {_name: name});
-    }
+        remove(name) {
+          _.remove(domainsObj, {
+            name: name
+          })
+        },
 
-  }
-}]);
+        getDomainDetails(name) {
+          return _.find(domainsObj.domains.domain, {_name: name});
+        },
+        exportToXML() {
+          const xmlString = x2js.json2xml_str(angular.copy(domainsObj));
+          return new Blob([xmlString], {type: 'text/xml'});
+        }
+      }
+    }]);

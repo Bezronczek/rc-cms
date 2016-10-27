@@ -9,5 +9,6 @@ angular.module('cms', [
   'photoDetail',
   'domainDetails',
   'ui.router',
-  'dragularModule'
+  'dragularModule',
+  'xmlLoader'
 ]);

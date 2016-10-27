@@ -12,12 +12,7 @@
     display: block;
 }
 
-.glyphicon.glyphicon-remove {
-    color: red;
-}
-
-.panel-heading .glyphicon-remove {
-    /*color: #FF540B;*/
+.panel-heading.glyphicon-remove {
     color: #FF753A;
 }
 
@@ -65,8 +60,12 @@ li.list-group-item.active > a {
     border: 1px dashed black;
 }
 
-.dragover {
+
+.photos-draggable.dragover {
     border: 2px dashed #337ab7;
+}
+
+.photos-draggable.dragover * {
     opacity: 0.3;
     transition: opacity 0.2s ease-in-out;
 }
@@ -109,4 +108,19 @@ li.list-group-item.active > a {
 
 .page-title {
     text-transform: capitalize;
+}
+
+.xmlLoader {
+    border: 2px dashed #337ab7;
+    text-align: center;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.xmlLoader.dragover {
+    border: 2px dashed #FF753A;
+}
+
+.xmlLoader.dragover * {
+    opacity: 0.3;
 }

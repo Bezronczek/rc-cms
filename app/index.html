@@ -6,6 +6,8 @@
   <title>CMS</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+  <!--TODO: Apply this style-->
+  <!--<link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/bootstrap-material-design.css">-->
   <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css">
   <link rel="stylesheet" href="bower_components/dragular/dist/dragular.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -23,10 +25,10 @@
   <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
   <script src="bower_components/dragular/dist/dragular.min.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script src="bower_components/file-saver/FileSaver.min.js"></script>
 
   <script src="lib/angular-ui-router.js"></script>
   <script src="lib/angular-x2js.js"></script>
-
 
   <script src="app.module.js"></script>
   <script src="app.config.js"></script>
@@ -71,12 +73,14 @@
   <script src="photo-detail/photo-detail.module.js"></script>
   <script src="photo-detail/photo-detail.component.js"></script>
 
+  <script src="xml-loader/xml-loader.module.js"></script>
+  <script src="xml-loader/xml-loader.component.js"></script>
 
 </head>
 <body ng-app="cms">
 <!--App Container-->
 <div class="container-fluid layout">
-  <ui-view></ui-view>
+  <div ui-view="root"></div>
 </div>
 <!--/ App Container-->
 </body>
