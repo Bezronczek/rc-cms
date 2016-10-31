@@ -5,8 +5,8 @@ angular
       domains: "="
     },
     templateUrl: 'domain-view/domain-view.template.html',
-    controller: ['$state', 'dragularService', 'Domain', '$scope',
-      function DomainListController($state, dragularService, Domain, $scope) {
+    controller: ['$state', 'dragularService', 'Domain',
+      function DomainListController($state, dragularService, Domain) {
 
         const self = this;
 
@@ -15,11 +15,6 @@ angular
         dragularService('.draggable', {
           containersModel: self.domains,
           nameSpace: 'domains',
-          scope: $scope
-        });
-
-        $scope.$on('dragulardrop', function(event, el){
-          Domain.save();
         });
 
         this.addDomain = function (name) {

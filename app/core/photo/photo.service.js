@@ -1,7 +1,7 @@
 angular
   .module('core.photo')
-  .factory('Photo', ['lodash', 'x2js', '$http',
-    function (_, x2js, $http) {
+  .factory('Photo', ['lodash', 'x2js', '$http', '$interval',
+    function (_, x2js, $http, $interval) {
 
       let photosObj = {
         photos: {
@@ -13,13 +13,22 @@ angular
         photosObj = JSON.parse(localStorage.getItem('photosObject'))
       }
 
+      function save() {
+        localStorage.setItem('photosObject', JSON.stringify(photosObj));
+      }
+
+      $interval(save, 60000);
+
       return {
         save() {
           localStorage.setItem('photosObject', JSON.stringify(photosObj));
         },
+        clear() {
+          photosObj.photos.photo.length = 0;
+        },
         setPhotosObject(obj) {
           return new Promise(resolve => {
-            photosObj = obj;
+            photosObj = angular.copy(obj);
             localStorage.setItem('photosObject', JSON.stringify(photosObj));
             resolve();
           });

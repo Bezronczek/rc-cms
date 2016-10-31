@@ -1,6 +1,8 @@
+<!--MOVE / ADD PAGE SECTION-->
 <div class="container-fluid add-page-container">
   <div class="col-lg-12">
     <div class="row">
+
       <div class="col-lg-2">
         <ui-select on-select="$ctrl.movePageToDomain($item, $ctrl.domainName)" ng-model="$selected" theme="bootstrap">
           <ui-select-match placeholder="Przenies strone">
@@ -11,16 +13,21 @@
           </ui-select-choices>
         </ui-select>
       </div>
+
       <button class="btn btn-success" ng-click="$ctrl.addPage()">Nowa strona</button>
+
     </div>
   </div>
 </div>
+<!--MOVE / ADD PAGE SECTION-->
 <div class="pages-list-draggable">
   <div ng-repeat="page in $ctrl.pages track by $index" class="container-fluid page">
     <div class="col-lg-12">
       <div class="row">
+        <!--PANEL-->
         <div class="panel panel-default top15">
-          <div class="panel-heading panel-heading-page" data-toggle="collapse" data-target="#{{page._action}}Details"
+          <!--HEAD-->
+          <div class="panel-heading collapsed" data-toggle="collapse" data-target="#{{page._action}}Details"
                aria-expanded="true" aria-controls="{{page.action}}Groups">
             <span class="glyphicon glyphicon-chevron-up move-element" ng-click="$ctrl.movePageUp(page, $index); $event.stopPropagation()"></span>
             <span class="glyphicon glyphicon-chevron-down move-element" ng-click="$ctrl.movePageDown(page, $index); $event.stopPropagation()"></span>
@@ -28,10 +35,14 @@
             {{page._action === "" ? "&lt;uzupelnijakcje&gt;" : page._action}}
           </span>
           </div>
+          <!--/ HEAD-END-->
+          <!--BODY-->
           <div class="pageDetails panel-body collapse" id="{{page._action}}Details">
             <page-details page="page" groups="$ctrl.groups" on-delete="$ctrl.deletePage(page)"></page-details>
           </div>
+          <!--BODY-END-->
         </div>
+        <!--/ PANEL-END-->
       </div>
 
     </div>

@@ -1,7 +1,7 @@
 angular
   .module('core.page')
-  .factory('Page', ['lodash', 'x2js',
-    function (_, x2js) {
+  .factory('Page', ['lodash', 'x2js', '$interval',
+    function (_, x2js, $interval) {
 
       let pagesObj =  {
         pages: {
@@ -13,13 +13,22 @@ angular
         pagesObj = JSON.parse(localStorage.getItem('pagesObject'));
       }
 
+      function save() {
+        localStorage.setItem('pagesObject', JSON.stringify(pagesObj));
+      }
+
+      $interval(save, 60000);
+
       return {
         save() {
           localStorage.setItem('pagesObject', JSON.stringify(pagesObj));
         },
+        clear() {
+          pagesObj.pages.page.length = 0;
+        },
         setPagesObject(obj) {
           return new Promise(resolve => {
-            pagesObj = obj;
+            pagesObj = angular.copy(obj);
             localStorage.setItem('pagesObject', JSON.stringify(pagesObj));
             resolve();
           });

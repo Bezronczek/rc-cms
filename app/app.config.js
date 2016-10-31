@@ -100,6 +100,8 @@ angular.module('cms')
         $stateProvider.state(state);
       });
 
+      $urlRouterProvider.when('/photos', '/photos/all');
+
       $urlRouterProvider.otherwise('/');
 
       $locationProvider.hashPrefix('!');

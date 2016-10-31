@@ -23,8 +23,6 @@ angular
           return filteredModel;
         };
 
-
-
         self.moveGroupUp = function (group) {
 
           let filteredIndex = _.findIndex(self.filteredModel, group);

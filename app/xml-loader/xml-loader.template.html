@@ -1,9 +1,9 @@
 <div class="col-lg-2">
+  <!--<div class="row bot15">-->
+    <!--<button class="btn btn-primary form-control bot15" ui-sref="photos-view.all">Przejdz do zdjec</button>-->
+    <!--<button class="btn btn-primary form-control bot15" ui-sref="domains">Przejdz do domen</button>-->
+  <!--</div>-->
   <div class="row bot15">
-    <button class="btn btn-primary form-control bot15" ui-sref="photos-view.all">Przejdz do zdjec</button>
-    <button class="btn btn-primary form-control bot15" ui-sref="domains">Przejdz do domen</button>
-  </div>
-  <div class="row top15 bot15">
     <button class="btn btn-primary form-control top15" ng-click="$ctrl.exportDomains()">Exportuj Domeny</button>
     <button class="btn btn-primary form-control top15" ng-click="$ctrl.exportPages()">Exportuj Strony</button>
     <button class="btn btn-primary form-control top15" ng-click="$ctrl.exportGroups()">Exportuj Grupy</button>
@@ -13,7 +13,7 @@
 
   </div>
   <div class="row top15">
-    <button class="btn btn-danger form-control top15" ng-click="$ctrl.clearLocalStorage()">Wyczysc pamiec podreczna</button>
+    <button class="btn btn-danger form-control top15" ng-click="$ctrl.clearAppData()">Wyczysc dane aplikacji</button>
   </div>
 </div>
 <div class="col-lg-8 col-lg-offset-1">

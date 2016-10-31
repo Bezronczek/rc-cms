@@ -1,7 +1,8 @@
 angular
   .module('core.domain')
-  .factory('Domain', ['lodash', 'x2js',
-    function (_, x2js) {
+  .factory('Domain', ['lodash', 'x2js', '$interval',
+    function (_, x2js, $interval) {
+
 
       let domainsObj = {
         domains: {
@@ -13,17 +14,19 @@ angular
         domainsObj = JSON.parse(localStorage.getItem('domainsObject'));
       }
 
+      function save() {
+        localStorage.setItem('domainsObject', JSON.stringify(domainsObj));
+      }
+
+      $interval(save, 60000);
+
       return {
-        save() {
-          return new Promise(resolve => {
-            console.log(domainsObj);
-            localStorage.setItem('domainsObject', JSON.stringify(domainsObj));
-            resolve();
-          })
+        clear() {
+          domainsObj.domains.domain.length = 0;
         },
         setDomainsObject(obj) {
           return new Promise(resolve => {
-            domainsObj = obj;
+            domainsObj = angular.copy(obj);
             localStorage.setItem('domainsObject', JSON.stringify(domainsObj));
             resolve();
           })
@@ -31,7 +34,6 @@ angular
         list() {
           return domainsObj.domains.domain;
         },
-
         add(name) {
           domainsObj.domains.domain.push({
             _name: name,
@@ -40,9 +42,7 @@ angular
             _url: ''
           });
 
-          this.save();
         },
-
         delete(domain) {
           return new Promise((resolve, reject) => {
             try {
@@ -57,7 +57,6 @@ angular
         },
         rename(domain, newName) {
           domain._name = newName;
-          this.save();
         },
         getDomainDetails(name) {
           return _.find(domainsObj.domains.domain, {_name: name});

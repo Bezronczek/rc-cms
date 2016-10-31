@@ -79,6 +79,15 @@
 </head>
 <body ng-app="cms">
 <!--App Container-->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li ui-sref-active="active" ><a ui-sref="domains">Domains</a></li>
+      <li ui-sref-active="active" ><a ui-sref="photos-view">Zdjecia</a></li>
+      <li ui-sref-active="active"><a ui-sref="xml-loader">Import/Export XML</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container-fluid layout">
   <div ui-view="root"></div>
 </div>

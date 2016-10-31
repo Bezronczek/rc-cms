@@ -28,6 +28,7 @@ angular
                 const parsedObj = x2js.xml_str2json(xmlString);
                 const rootName = _.keys(parsedObj)[0];
 
+                console.log('Handler');
                 handlers[rootName](parsedObj).then(() => {
                   self.loadedFiles.push(file.name);
                 });
@@ -65,6 +66,15 @@ angular
 
         self.clearLocalStorage = function () {
           localStorage.clear();
+        };
+
+        self.clearAppData = function() {
+          localStorage.clear();
+          Domain.clear();
+          Page.clear();
+          Group.clear();
+          Photo.clear();
+          File.clear();
         }
       }]
   });

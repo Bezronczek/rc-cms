@@ -1,19 +1,19 @@
 <div class="col-lg-2">
   <div class="row">
     <div class="container-fluid">
-      <button class="btn btn-primary form-control bot15" ui-sref="xml-loader">Zarzadzaj XML</button>
-      <button class="btn btn-primary form-control bot15" ui-sref="domains">Przejdz do domen</button>
+      <!--<button class="btn btn-primary form-control bot15" ui-sref="xml-loader">Zarzadzaj XML</button>-->
+      <!--<button class="btn btn-primary form-control bot15" ui-sref="domains">Przejdz do domen</button>-->
       <div class="list-group draggable">
 
-        <a href="" ui-sref="photos-view.all" ui-sref-active="active" class="list-group-item">
+        <a href="" ui-sref=".all" ui-sref-active="active" class="list-group-item">
           Wszystkie
         </a>
 
-        <a href="" ui-sref="photos-view.photos({groupName: ''})" ui-sref-active="active" class="list-group-item">
+        <a href="" ui-sref=".photos({groupName: ''})" ui-sref-active="active" class="list-group-item">
           Nieprzypisane
         </a>
 
-        <a href="#" ui-sref="photos-view.photos({groupName: group._name})" ui-sref-active="active" ng-repeat="group in $ctrl.groups" class="list-group-item">
+        <a href="#" ui-sref=".photos({groupName: group._name})" ui-sref-active="active" ng-repeat="group in $ctrl.groups" class="list-group-item">
           {{group._name}}
         </a>
       </div>
