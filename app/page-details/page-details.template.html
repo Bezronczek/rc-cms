@@ -10,26 +10,31 @@
       <label uib-btn-checkbox btn-checkbox-true="'yes'" btn-checkbox-false="'no'" ng-model="$ctrl.page._show"
              class="btn btn-primary">Show</label>
     </div>
-    <button class="btn btn-danger pull-right" ng-click="$ctrl.deletePage($ctrl.page)">Usun</button>
+    <button class="btn btn-danger pull-right" ng-click="$ctrl.deletePage($ctrl.page)">Usun strone</button>
     <br/>
     <div class="form-inline top15">
       <label for="{{$ctrl.page._action}}Action">Akcja: </label>
       <input id="{{$ctrl.page._action}}Action" type="text" class="form-control input-auto-width" placeholder="action"
-             ng-model="$ctrl.page._action">
+             ng-model="pageAction" ng-init="pageAction = $ctrl.page._action + ''" ng-blur="$ctrl.onPageActionChange(pageAction)">
 
       <label for="{{$ctrl.page._action}}Domain">Domena: </label>
       <input id="{{$ctrl.page._action}}Domain" type="text" class="form-control input-auto-width" placeholder="domain"
              ng-model="$ctrl.page._domain">
     </div>
 
-    <div ng-repeat="data in $ctrl.page.data" class="well top15">
-      <div class="form-group">
+
+
+    <!--<div ng-repeat="data in $ctrl.page.data" class="top15">-->
+      <div class="form-group top15">
+
         <!--_lang-->
         <div class="form-inline">
+
           <label ng-class="{'text-danger': data._lang===''}"
                  for="{{$ctrl.page._action}}PageDataLang{{data._lang}}">Jezyk:</label>
-          <input id="{{$ctrl.page._action}}PageDataLang{{data._lang}}" ng-model="data._lang" type="text"
-                 class="form-control input-auto-width" placeholder="lang"/>
+          <!--<input  ng-model="data._lang" type="text"-->
+                 <!--class="form-control input-auto-width" placeholder="lang"/>-->
+          <select id="{{$ctrl.page._action}}PageDataLang{{data._lang}}" class="form-control input-auto-width" ng-init="data = $ctrl.page.data[0]" ng-model="data" ng-options="data._lang for data in $ctrl.page.data"></select>
 
           <!--_url-->
           <label ng-class="{'text-danger': data._url===''}"
@@ -49,13 +54,13 @@
         <textarea id="{{$ctrl.page._action}}PageDataLang{{data._desc}}" ng-model="data._desc" type="text"
                   class="form-control " placeholder="desc" rows="2"></textarea>
 
-        <button class="btn btn-danger top15" confirm="Na pewno?" confirm-settings="{size: 'sm'}"
-                ng-click="$ctrl.removePageData($ctrl.page, data)">Usun
-        </button>
+        <!--<button class="btn btn-danger top15" confirm="Na pewno?" confirm-settings="{size: 'sm'}"-->
+                <!--ng-click="$ctrl.removePageData($ctrl.page, data)">Usun-->
+        <!--</button>-->
       </div>
-    </div>
+    <!--</div>-->
 
-    <button ng-click="$ctrl.addPageData($ctrl.page)" class="btn btn-primary top15">Dodaj dane</button>
+    <!--<button ng-click="$ctrl.addPageData($ctrl.page)" class="btn btn-primary top15">Dodaj dane</button>-->
   </div>
 </div>
 

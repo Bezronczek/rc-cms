@@ -47,10 +47,14 @@ angular
             page: {
               _name: pageName,
               _position: defaultGroupPosition
-            }
+            },
+            data: [{
+              _lang: 'pl',
+            }, {
+              _lang: 'en'
+            }]
           });
 
-          this.save();
         },
         addGroupToPage(group, pageName) {
           const index = _.findIndex(groupsObj.groups.group, group);
@@ -72,7 +76,6 @@ angular
               }]
             }
           }
-          this.save();
         },
 
         removeGroupFromPage(group, pageName) {
@@ -87,7 +90,6 @@ angular
             group.page._name = '';
           }
 
-          this.save();
 
         },
 
@@ -101,9 +103,18 @@ angular
             }
           });
 
-          this.save();
         },
-        exportToXML() {
+        renamePageAction(oldName, newName) {
+          _.each(groupsObj.groups.group, group => {
+            if (group.page._name === oldName) {
+              group.page._name = newName;
+            }
+          });
+        },
+        move(fromIndex, toIndex) {
+          groupsObj.groups.group.splice(toIndex, 0, groupsObj.groups.group.splice(fromIndex, 1)[0]);
+        },
+        exportToXMLFile() {
           const xmlString = x2js.json2xml_str(angular.copy(groupsObj));
           return new Blob([xmlString], {type: 'text/xml'});
         }

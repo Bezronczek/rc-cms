@@ -1,17 +1,25 @@
 <div class="panel panel-primary">
+  <!--HEADER-->
   <div class="panel-heading panel-heading-page" data-toggle="collapse"
        data-target="#Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent"
        aria-expanded="true" aria-controls="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
-    <span class="glyphicon glyphicon-chevron-up move-element" ng-click="$ctrl.moveGroupUp(); $event.stopPropagation()"></span>
-    <span class="glyphicon glyphicon-chevron-down move-element" ng-click="$ctrl.moveGroupDown(); $event.stopPropagation()"></span>
-    <span class="h4">{{$ctrl.group._name}}</span>
-    <!--<button class="btn btn-default" ng-click="$ctrl.moveGroupUp(); $event.stopPropagation()">Gora</button>-->
-    <!--<button class="btn btn-default" ng-click="$ctrl.moveGroupDown(); $event.stopPropagation()">Dol</button>-->
-    <a href="" ng-click="$ctrl.removeGroupFromPage()"><span class="glyphicon glyphicon-remove pull-right"></span></a>
-  </div>
-  <div class="panel-body collapse" id="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
+    <span class="glyphicon glyphicon-chevron-up move-element"
+          ng-click="$ctrl.moveGroupUp(); $event.stopPropagation()"></span>
+    <span class="glyphicon glyphicon-chevron-down move-element"
+          ng-click="$ctrl.moveGroupDown(); $event.stopPropagation()"></span>
 
-    <div class="panel panel-default">
+    <!--HEADER CONTENT-->
+    <span class="h4">
+      {{$ctrl.group._name}} | {{$ctrl.name}}
+    </span>
+    <a href="" ng-click="$ctrl.removeGroupFromPage()"><span class="glyphicon glyphicon-remove pull-right"></span></a>
+
+  </div>
+
+  <!--BODY-->
+  <div class="panel-body collapse" id="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
+    <!--SETTINGS-->
+    <div class="panel panel-primary">
 
       <div class="panel-heading panel-heading-page" data-toggle="collapse"
            data-target="#Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings"
@@ -21,36 +29,37 @@
 
       <div class="panel-body collapse" id="Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings">
 
-
+        <!--GROUP NAME-->
         <div class="form-inline">
           <label for="{{$ctrl.group._name}}NameInput">Nazwa grupy</label>
-          <input id="{{$ctrl.group._name}}NameInput" type="text" ng-model-options="{updateOn: 'blur'}"
-                 ng-model="$ctrl.group._name" class="form-control input-auto-width">
+          <input id="{{$ctrl.group._name}}NameInput" type="text"
+                 ng-model="groupName" ng-init="groupName = $ctrl.group._name + ''"
+                 ng-blur="$ctrl.onGroupNameChange(groupName)" class="form-control input-auto-width">
           <button class="btn btn-danger pull-right" ng-click="$ctrl.deleteGroup()">Usun</button>
         </div>
 
+        <!--GROUP POSITION-->
         <div class="btn-group top15 bot15">
           <label class="btn btn-primary" ng-model="$ctrl.group.page._position" uib-btn-radio="'gorny'">Gorny</label>
           <label class="btn btn-primary" ng-model="$ctrl.group.page._position" uib-btn-radio="'dolny'">Dolny</label>
         </div>
 
-
-        <div ng-repeat="data in $ctrl.group.data" class="form-group language-group form-inline">
+        <!--LANGUAGE DATA-->
+        <div class="form-group language-group form-inline">
           <label>Jezyk: </label>
-          <input ng-model="data._lang" type="text" class="form-control group-form-control" placeholder="Jezyk">
+          <select class="form-control group-form-control" ng-options="data._lang for data in $ctrl.group.data"
+                  ng-model="data" ng-init="data = $ctrl.group.data[0]"></select>
+          <!--<input ng-model="data._lang" type="text" class="form-control group-form-control" placeholder="Jezyk">-->
           <label>URL: </label>
           <input ng-model="data._url" type="text" class="form-control group-form-control" placeholder="URL">
           <label>Tytul: </label>
           <input ng-model="data._title" type="text" class="form-control group-form-control" placeholder="Tytul">
-          <a ng-click="$ctrl.removeGroupData(data)" href="">
-            <span class="glyphicon glyphicon-remove color-orange"></span>
-          </a>
         </div>
-        <div>
-          <button ng-click="$ctrl.addGroupData()" class="btn btn-primary">Dodaj dane</button>
-        </div>
+
+
       </div>
     </div>
+    <!--SETTINGS END-->
 
     <div class="photos-list container-fluid top15">
       <photos-list photos="$ctrl.photos" groupname="$ctrl.group._name"></photos-list>

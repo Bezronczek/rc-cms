@@ -34,7 +34,10 @@ angular
           });
         },
         list() {
-          return pagesObj;
+          return pagesObj.pages.page;
+        },
+        listUnassigned() {
+          return _.filter(pagesObj.pages.page, {_domain: ''})
         },
         listByDomainName(domainName) {
           return _.filter(pagesObj.pages.page, {_domain: domainName});
@@ -42,18 +45,26 @@ angular
         delete(page) {
           _.remove(pagesObj.pages.page, {_action: page._action});
           console.log(pagesObj.pages.page);
-          this.save();
         },
-        addPage({_action, _domain, _photo, _show, data}) {
+        addPage(domainName) {
           pagesObj.pages.page.unshift({
-            _action,
-            _domain,
-            _photo,
-            _show,
-            data
+            _action: '',
+            _domain: domainName,
+            _photo: 'yes',
+            _show: 'no',
+            data: [{
+              _lang: 'pl',
+              _url: '',
+              _title: '',
+              _desc: ''
+            },{
+              _lang: 'en',
+              _url: '',
+              _title: '',
+              _desc: ''
+            }]
           });
 
-          this.save();
         },
         deleteDomain(domainName) {
           _.each(pagesObj.pages.page, page => {
@@ -61,11 +72,8 @@ angular
               page._domain = '';
             }
           });
-
-          this.save();
         },
         updateDomainName(domainName, newName) {
-          console.log(pagesObj.pages.page);
 
           pagesObj.pages.page.forEach(page => {
             if (page._domain === domainName) {
@@ -73,13 +81,14 @@ angular
             }
           });
 
-          this.save();
         },
         moveToDomain(page, domainName){
           page._domain = domainName;
-          this.save();
         },
-        exportToXML() {
+        move(fromIndex, toIndex) {
+          pagesObj.pages.page.splice(toIndex, 0, pagesObj.pages.page.splice(fromIndex, 1)[0]);
+        },
+        exportToXMLFile() {
           const xmlString = x2js.json2xml_str(angular.copy(pagesObj));
           return new Blob([xmlString], {type: 'text/xml'});
         }

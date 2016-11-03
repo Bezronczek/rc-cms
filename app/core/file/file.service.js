@@ -66,7 +66,7 @@ angular
             resolve();
           });
         },
-        exportToXML() {
+        exportToXMLFile() {
           const xmlString = x2js.json2xml_str(angular.copy(filesObj));
           return new Blob([xmlString], {type: 'text/xml'});
         }
