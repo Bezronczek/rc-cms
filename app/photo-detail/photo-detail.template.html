@@ -9,18 +9,21 @@
       </div>
 
       <div class="row top15">
-        <div ng-repeat="data in $ctrl.resolve.photo.data">
-          <div class="form-group form-inline">
-            <label for="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}">Jezyk</label>
-            <input id="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}" class="form-control" type="text"
-                   ng-model="data._lang">
-            <label for="{{$ctrl.resolve.photo._id}}TitleInput{{data._lang}}">Tytul</label>
-            <input id="{{$ctrl.resolve.photo._id}}TitleInput{{data._lang}}" class="form-control" type="text"
-                   ng-model="data._title">
-            <a href="" ng-click="$ctrl.removePhotoData(data)"><span class="glyphicon glyphicon-remove"></span></a>
-          </div>
+        <!--<div ng-repeat="data in $ctrl.resolve.photo.data">-->
+        <div class="form-group form-inline">
+          <label for="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}">Jezyk</label>
+          <!--<input id="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}" class="form-control" type="text"-->
+          <!--ng-model="data._lang">-->
+          <select class="form-control" ng-model="data" ng-init="data = $ctrl.resolve.photo.data[0]"
+                  ng-options="data._lang for data in $ctrl.resolve.photo.data"
+                  id="{{$ctrl.resolve.photo._id}}LangInput{{data._lang}}"></select>
+          <label for="{{$ctrl.resolve.photo._id}}TitleInput{{data._lang}}">Tytul</label>
+          <input id="{{$ctrl.resolve.photo._id}}TitleInput{{data._lang}}" class="form-control" type="text"
+                 ng-model="data._title">
+          <a href="" ng-click="$ctrl.removePhotoData(data)"><span class="glyphicon glyphicon-remove"></span></a>
         </div>
-        <button class="btn btn-primary" ng-click="$ctrl.addPhotoData()">Dodaj dane</button>
+        <!--</div>-->
+        <!--<button class="btn btn-primary" ng-click="$ctrl.addPhotoData()">Dodaj dane</button>-->
       </div>
 
     </div>
@@ -36,15 +39,16 @@
         </ui-select>
       </div>
     </div>
-
-    <button class="btn btn-danger" ng-click="$ctrl.deletePhoto($ctrl.resolve.photo)">Usun</button>
+    <div class="col-lg-9 top15">
+      <button class="btn btn-danger pull-right" ng-click="$ctrl.deletePhoto($ctrl.resolve.photo)">Usun</button>
+    </div>
   </div>
 
 
   <!--<pre>-->
-    <!--{{$ctrl.resolve.photo}}-->
+  <!--{{$ctrl.resolve.photo}}-->
   <!--</pre>-->
   <!--<pre>-->
-    <!--{{$ctrl.resolve.files}}-->
+  <!--{{$ctrl.resolve.files}}-->
   <!--</pre>-->
 </div>
