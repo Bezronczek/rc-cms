@@ -10,7 +10,7 @@
 
     <!--HEADER CONTENT-->
     <span class="h4">
-      {{$ctrl.group._name}} | {{$ctrl.name}}
+      {{$ctrl.group._name}}
     </span>
     <a href="" ng-click="$ctrl.removeGroupFromPage()"><span class="glyphicon glyphicon-remove pull-right"></span></a>
 
@@ -19,7 +19,7 @@
   <!--BODY-->
   <div class="panel-body collapse" id="Page{{$ctrl.name}}Group{{$ctrl.group._name}}PanelContent">
     <!--SETTINGS-->
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
 
       <div class="panel-heading panel-heading-page" data-toggle="collapse"
            data-target="#Page{{$ctrl.name}}{{$ctrl.group._name}}GroupSettings"
@@ -65,7 +65,7 @@
       <photos-list photos="$ctrl.photos" groupname="$ctrl.group._name"></photos-list>
     </div>
 
-    <a role="button" href="" class="btn btn-primary pull-right">Przejdz do edycji</a>
+    <!--<a role="button" href="" class="btn btn-primary pull-right">Przejdz do edycji</a>-->
 
 
   </div>

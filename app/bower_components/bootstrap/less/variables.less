@@ -14,12 +14,14 @@
 @gray-light:             #757575;
 @gray-lighter:           #fff;
 
-@brand-primary:         #0277BD;
-@brand-success:         #4CAF50;
+@brand-primary:         #00695C;
+@brand-success:         #43A047;
 @brand-info:            #80D8FF;
 @brand-warning:         #FFC107;
-@brand-danger:          #B71C1C;
+@brand-danger:          #C62828;
 @brand-accent:          #00ACC1;
+
+@brand-container:       #37474F;
 
 //== Scaffolding
 //
@@ -110,6 +112,7 @@
 //** Global color for active items (e.g., navs or dropdowns).
 @component-active-color:    #fff;
 //** Global background color for active items (e.g., navs or dropdowns).
+//@component-active-bg:       #080808;
 @component-active-bg:       @brand-primary;
 
 //** Width of the `border` for generating carets that indicate dropdowns.
@@ -367,7 +370,7 @@
 @navbar-collapse-max-height:       340px;
 
 @navbar-default-color:             #fff;
-@navbar-default-bg:                #0288D1;
+@navbar-default-bg:                @gray-dark;
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
@@ -704,7 +707,7 @@
 //
 //##
 
-@panel-bg:                    #37474F;
+@panel-bg:                    @brand-container;
 //@panel-bg:                    #01579B;
 @panel-body-padding:          15px;
 @panel-heading-padding:       10px 15px;
