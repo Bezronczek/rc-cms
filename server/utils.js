@@ -34,6 +34,8 @@ module.exports.prepareFiles = function (buffer, photoId) {
   const minPath = `/photos/min/${photoId}.jpg`;
   const previewPath = `/photos/preview/${photoId}.jpg`;
 
+  checkFolders();
+
   sharp(buffer)
     .toFile(`${config.dataFolder}${maxPath}`)
     .catch(e => {
@@ -43,7 +45,6 @@ module.exports.prepareFiles = function (buffer, photoId) {
   while(!fs.existsSync(config.dataFolder+maxPath)) {
 
   }
-
 
   sharp(buffer)
     .quality(95)
@@ -85,6 +86,25 @@ module.exports.prepareFiles = function (buffer, photoId) {
 
   return generateFileEntry(options);
 
+};
+
+function checkFolders() {
+  if(!fs.existsSync(`${config.dataFolder}/photos`)) {
+    fs.mkdirSync(`${config.dataFolder}/photos`);
+    fs.mkdirSync(`${config.dataFolder}/photos/min`);
+    fs.mkdirSync(`${config.dataFolder}/photos/max`);
+    fs.mkdirSync(`${config.dataFolder}/photos/preview`);
+  }
+
+  if(!fs.existsSync(`${config.dataFolder}/photos/min`)) {
+    fs.mkdirSync(`${config.dataFolder}/photos/min`);
+  }
+  if(!fs.existsSync(`${config.dataFolder}/photos/max`)) {
+    fs.mkdirSync(`${config.dataFolder}/photos/max`);
+  }
+  if(!fs.existsSync(`${config.dataFolder}/photos/preview`)) {
+    fs.mkdirSync(`${config.dataFolder}/photos/preview`);
+  }
 }
 
 function generateFileEntry({

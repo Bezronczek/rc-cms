@@ -13,6 +13,7 @@ angular
 
         const self = this;
 
+        // Deprecated
         self.addGroupData = function () {
 
           console.log(self.group);
@@ -42,16 +43,12 @@ angular
 
         self.removeGroupFromPage = function () {
           Group.removeGroupFromPage(self.group, self.name);
-          // if (Array.isArray(self.group.page)) {
-          //   if (self.group.page.length === 2) {
-          //     _.remove(self.group.page, {_name: self.name});
-          //     self.group.page = self.group.page[0];
-          //   } else {
-          //     _.remove(self.group.page, {_name: self.name});
-          //   }
-          // } else {
-          //   self.group.page._name = '';
-          // }
+        };
+
+        self.onGroupNameChange = function(newName) {
+          console.log(newName);
+          Photo.changeGroupName(self.group._name, newName);
+          self.group._name = newName;
         };
 
         self.deleteGroup = function () {

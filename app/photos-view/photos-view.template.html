@@ -20,7 +20,7 @@
 
       <div class="input-group">
       <span class="input-group-btn">
-        <button class="btn btn-primary" ng-click="$ctrl.addGroup(groupName)">Dodaj</button>
+        <button class="btn btn-primary" ng-click="$ctrl.addGroup(groupName); groupName = ''">Dodaj</button>
       </span>
         <input type="text" class="form-control" placeholder="Nowa groupa" ng-model="groupName">
       </div>

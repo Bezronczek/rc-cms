@@ -77,7 +77,6 @@ angular
               _name: group
             }
           });
-          this.save();
         },
         deleteGroup(group) {
           _.each(photosObj.photos.photo, photo => {
@@ -85,7 +84,6 @@ angular
               photo.group._name = ''
             }
           });
-          this.save();
         },
         delete(photo) {
           return new Promise((resolve, reject) => {
@@ -98,10 +96,15 @@ angular
               console.error(err.stack || err);
             })
           });
-
-
         },
-        exportToXML() {
+        changeGroupName(oldName, newName) {
+          photosObj.photos.photo.forEach(photo => {
+            if (photo.group._name === oldName) {
+              photo.group._name = newName;
+            }
+          });
+        },
+        exportToXMLFile() {
           const xmlString = x2js.json2xml_str(angular.copy(photosObj));
           return new Blob([xmlString], {type: 'text/xml'});
         }

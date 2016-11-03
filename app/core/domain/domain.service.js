@@ -48,7 +48,6 @@ angular
             try {
               console.log(domain);
               _.remove(domainsObj.domains.domain, domain);
-              this.save();
               resolve();
             } catch (err) {
               reject(err.stack || err);
@@ -61,7 +60,7 @@ angular
         getDomainDetails(name) {
           return _.find(domainsObj.domains.domain, {_name: name});
         },
-        exportToXML() {
+        exportToXMLFile() {
           const xmlString = x2js.json2xml_str(angular.copy(domainsObj));
           return new Blob([xmlString], {type: 'text/xml'});
         }

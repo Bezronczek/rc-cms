@@ -1,11 +1,11 @@
 <div class="container-fluid">
 
-  <div ng-if="$ctrl.domainDetails._name" class="panel panel-primary">
+  <div ng-if="$ctrl.domainDetails._name" class="panel panel-primary-filled">
     <div class="panel-heading" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
       <span class="text-capitalize">Ustawienia dla {{$ctrl.domainDetails._name}}</span>
     </div>
-    <div class="panel-body domain-details" uib-collapse="$ctrl.isCollapsed">
-      <div class="row form-inline">
+    <div class="panel-body" uib-collapse="$ctrl.isCollapsed">
+      <div class="form-inline">
         <label>Nazwa</label>
         <input ng-blur="$ctrl.nameChanged(domainName)" class="form-control input-auto-width" type="text"
                ng-init="domainName = $ctrl.domainDetails._name+''" ng-model="domainName"/>

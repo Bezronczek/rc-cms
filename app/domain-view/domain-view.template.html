@@ -12,7 +12,7 @@
             {{domain._name}}
           </a>
         </div>
-        <a href="#" ui-sref="domains.pages({domainName: ''})" ui-sref-active="active" class="list-group-item">
+        <a href="#" ui-sref="domains.all" ui-sref-active="active" class="list-group-item">
           Nieprzypisane
         </a>
 
@@ -20,7 +20,7 @@
 
       <div class="input-group">
       <span class="input-group-btn">
-        <button class="btn btn-primary" ng-click="$ctrl.addDomain(domainName)">Dodaj</button>
+        <button class="btn btn-primary" ng-click="$ctrl.addDomain(domainName); domainName = ''">Dodaj</button>
       </span>
         <input type="text" class="form-control" placeholder="Nowa domena" ng-model="domainName">
       </div>

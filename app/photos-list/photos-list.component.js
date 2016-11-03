@@ -12,6 +12,8 @@ angular
         self.photos = Photo.list();
         self.tmpFiles = [];
         self.filteredModel = [];
+        self.filteredPhotosCount = self.filteredModel.length;
+
 
         dragularService($element.children(), {
           scope: $scope,
@@ -27,38 +29,16 @@ angular
         self.getFilteredModel = function (filteredModel, items, filterQuery) {
           filteredModel.length = 0;
           [].push.apply(filteredModel, $filter('photo')(items, filterQuery));
+          self.filteredPhotosCount = self.filteredModel.length;
           return filteredModel;
         };
+
+        self.photosList = self.getFilteredModel(self.filteredModel, self.photos, self.groupname);
 
         self.fileChange = function (files) {
 
           for (let file of files) {
             let nextId = Photo.getNextId();
-            //<editor-fold desc="loadImage blob">
-            // let reader = new FileReader();
-            // reader.onloadend = function (e) {
-            //
-            //   loadImage(file,
-            //     function (img) {
-            //       if (img.type !== 'error') {
-            //         img.toBlob(function (blob) {
-            //           self.tmpFiles.push(URL.createObjectURL(blob));
-            //         }, 'image/jpeg');
-            //       } else {
-            //         // if ('function' === typeof onError) {
-            //         //   onError(imageData.preview);
-            //         // }
-            //       }
-            //     },
-            //     {
-            //       maxWidth: 550,
-            //       maxHeight: 550,
-            //       canvas: true
-            //     });
-            //
-            //   // self.tmpFiles.push(e.target.result);
-            // };
-            //</editor-fold>
 
             let upload = Upload.http({
               url: `/getPhoto?id=${nextId}`,
@@ -74,7 +54,13 @@ angular
               const newPhoto = {
                 _id: resp.data._id,
                 group: {_name: self.groupname},
-                data: []
+                data: [{
+                  _lang: 'pl',
+                  _title: '',
+                },{
+                  _lang: 'pl',
+                  _title: '',
+                }]
               };
 
               File.addFilesForPhoto(resp.data)
@@ -83,10 +69,7 @@ angular
                 })
                 .then(() => {
                   _.remove(self.tmpFiles, {id: resp.data._id});
-                  // update filtered model
                 });
-
-              // console.log(resp.data);
             });
           }
         };

@@ -18,6 +18,23 @@ angular.module('cms')
           }
         },
         {
+          name: 'domains.all',
+          views: {
+            pages: {
+              component: 'pageList'
+            }
+          },
+          url: 'domain/',
+          resolve: {
+            pages: function (Page) {
+              return Page.listUnassigned();
+            },
+            groups: function (Group) {
+              return Group.list().groups.group;
+            }
+          }
+        },
+        {
           name: 'domains.pages',
           views: {
             pages: {
@@ -27,12 +44,16 @@ angular.module('cms')
               component: 'domainDetails'
             }
           },
-          url: 'domains/{domainName}',
+          url: 'domain/{domainName}',
           resolve: {
             pages: function (Page, $stateParams) {
+              if($stateParams.domainName === '') {
+                return Page.list();
+              }
               return Page.listByDomainName($stateParams.domainName);
             },
             domainDetails: function (Domain, $stateParams) {
+
               return Domain.getDomainDetails($stateParams.domainName);
             },
             groups: function (Group) {

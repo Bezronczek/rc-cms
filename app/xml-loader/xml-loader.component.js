@@ -28,7 +28,6 @@ angular
                 const parsedObj = x2js.xml_str2json(xmlString);
                 const rootName = _.keys(parsedObj)[0];
 
-                console.log('Handler');
                 handlers[rootName](parsedObj).then(() => {
                   self.loadedFiles.push(file.name);
                 });
@@ -45,23 +44,23 @@ angular
         };
 
         self.exportDomains = function () {
-          saveAs(Domain.exportToXML(), 'domains.xml');
+          saveAs(Domain.exportToXMLFile(), 'domains.xml');
         };
 
         self.exportPages = function () {
-          saveAs(Page.exportToXML(), 'pages.xml');
+          saveAs(Page.exportToXMLFile(), 'pages.xml');
         };
 
         self.exportGroups = function () {
-          saveAs(Group.exportToXML(), 'groups.xml');
+          saveAs(Group.exportToXMLFile(), 'groups.xml');
         };
 
         self.exportPhotos = function () {
-          saveAs(Photo.exportToXML(), 'photos.xml');
+          saveAs(Photo.exportToXMLFile(), 'photos.xml');
         };
 
         self.exportFiles = function () {
-          saveAs(File.exportToXML(), 'files.xml');
+          saveAs(File.exportToXMLFile(), 'files.xml');
         };
 
         self.clearLocalStorage = function () {

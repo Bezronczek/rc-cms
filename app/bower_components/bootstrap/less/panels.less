@@ -9,6 +9,7 @@
   background-color: @panel-bg;
   border: 1px solid transparent;
   border-radius: @panel-border-radius;
+
   .box-shadow(0 1px 1px rgba(0,0,0,.05));
 }
 
@@ -268,4 +269,8 @@
 }
 .panel-danger {
   .panel-variant(@panel-danger-border; @panel-danger-text; @panel-danger-heading-bg; @panel-danger-border);
+}
+.panel-primary-filled {
+  .panel-variant(@panel-primary-border; @panel-primary-text; @panel-primary-heading-bg; @panel-primary-border);
+  background-color: @panel-primary-heading-bg;
 }
