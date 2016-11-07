@@ -98,7 +98,6 @@ module.exports.prepareFiles = function (buffer, photoId) {
 };
 
 function resizeAndSave(buffer, {width, height}, targetPath) {
-  console.log(width, height);
   jimp.read(buffer, function(err, image) {
     if(err) console.error(err);
     try {
