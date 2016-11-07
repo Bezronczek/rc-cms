@@ -2,6 +2,8 @@
 
 CMS App for XML editing
 
+Application is still under development
+
 Dependencies:
 - Newest node 6
 
