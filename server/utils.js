@@ -1,6 +1,7 @@
-const sharp = require('sharp');
+// const sharp = require('sharp');
 const sizeOf = require('image-size');
 const fs = require('fs');
+const jimp = require('jimp');
 
 const config = require('./config.json');
 
@@ -36,36 +37,44 @@ module.exports.prepareFiles = function (buffer, photoId) {
 
   checkFolders();
 
-  sharp(buffer)
-    .toFile(`${config.dataFolder}${maxPath}`)
-    .catch(e => {
-      throw e
-    });
+
+  resizeAndSave(buffer,  {width, height}, `${config.dataFolder}${maxPath}`);
+
+  // sharp(buffer)
+  //   .toFile(`${config.dataFolder}${maxPath}`)
+  //   .catch(e => {
+  //     throw e
+  //   });
 
   while(!fs.existsSync(config.dataFolder+maxPath)) {
 
   }
 
-  sharp(buffer)
-    .quality(95)
-    .resize(minWidth, minHeight)
-    .toFile(`${config.dataFolder}${minPath}`)
-    .catch(e => {
-      throw e
-    });
+  resizeAndSave(buffer, {width: minWidth, height: minHeight}, `${config.dataFolder}${minPath}`);
+
+  // sharp(buffer)
+  //   .quality(95)
+  //   .resize(, )
+  //   .toFile(`${config.dataFolder}${minPath}`)
+  //   .catch(e => {
+  //     throw e
+  //   });
 
   while(!fs.existsSync(config.dataFolder+minPath)) {
 
   }
 
 
-  sharp(buffer)
-    .quality(95)
-    .resize(prevWidth, prevHeight)
-    .toFile(`${config.dataFolder}${previewPath}`)
-    .catch(e => {
-      throw e
-    });
+  resizeAndSave(buffer, {width: prevWidth, height: prevHeight}, `${config.dataFolder}${previewPath}`);
+
+
+  // sharp(buffer)
+  //   .quality(95)
+  //   .resize(prevWidth, prevHeight)
+  //   .toFile(`${config.dataFolder}${previewPath}`)
+  //   .catch(e => {
+  //     throw e
+  //   });
 
   while(!fs.existsSync(config.dataFolder+previewPath)) {
 
@@ -88,6 +97,21 @@ module.exports.prepareFiles = function (buffer, photoId) {
 
 };
 
+function resizeAndSave(buffer, {width, height}, targetPath) {
+  console.log(width, height);
+  jimp.read(buffer, function(err, image) {
+    if(err) console.error(err);
+    try {
+      this.resize(width, height)
+        .quality(95)
+        .write(targetPath);
+    } catch (e) {
+      console.error(e.stack || e);
+    }
+
+  });
+}
+
 function checkFolders() {
   if(!fs.existsSync(`${config.dataFolder}/photos`)) {
     fs.mkdirSync(`${config.dataFolder}/photos`);
@@ -107,6 +131,7 @@ function checkFolders() {
   }
 }
 
+//<editor-fold desc="generate file json">
 function generateFileEntry({
   photoId,
   minWidth,
@@ -152,3 +177,4 @@ function generateFileEntry({
     }]
   }
 }
+//</editor-fold>
