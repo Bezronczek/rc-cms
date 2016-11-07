@@ -544,12 +544,12 @@ fieldset[disabled] .btn-danger.active {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffebcccc', GradientType=0);
 }
 .well {
-  background-image: -webkit-linear-gradient(top, #353535 0%, #424242 100%);
-  background-image: -o-linear-gradient(top, #353535 0%, #424242 100%);
-  background-image: linear-gradient(to bottom, #353535 0%, #424242 100%);
+  background-image: -webkit-linear-gradient(top, #005046 0%, #00695C 100%);
+  background-image: -o-linear-gradient(top, #005046 0%, #00695C 100%);
+  background-image: linear-gradient(to bottom, #005046 0%, #00695C 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff353535', endColorstr='#ff424242', GradientType=0);
-  border-color: #292929;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff005046', endColorstr='#ff00695c', GradientType=0);
+  border-color: #00362f;
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
