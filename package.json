@@ -2,6 +2,10 @@
   "name": "rc-cms",
   "private": true,
   "version": "0.0.1",
+  "main": "server/index.js",
+  "engines": {
+    "node": "6.7.0"
+  },
   "devDependencies": {
     "bower": "*",
     "flow-bin": "^0.35.0",
