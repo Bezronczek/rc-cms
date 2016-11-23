@@ -5,6 +5,8 @@ const {prepareFiles, deletePhotoFiles} = require('./utils');
 const config = require('./config.json');
 const bodyParser = require('body-parser');
 
+const port = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../app'));
 app.use(express.static(config.dataFolder));
@@ -41,6 +43,6 @@ app.post('/getPhoto', (req, res) => {
     });
 });
 
-app.listen(3000, function () {
-  console.log('Serwer dziala na porcie 3000');
+app.listen(port, function () {
+  console.log('Serwer dziala na porcie', port);
 });
