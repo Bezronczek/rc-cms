@@ -4,5 +4,6 @@ angular.module('core', [
   'core.group',
   'core.photo',
   'core.file',
+  'core.resources',
   'ngLodash'
 ]);

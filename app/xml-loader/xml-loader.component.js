@@ -2,8 +2,8 @@ angular
   .module('xmlLoader')
   .component('xmlLoader', {
     templateUrl: '/xml-loader/xml-loader.template.html',
-    controller: ['Domain', 'Page', 'Group', 'Photo', 'File', 'x2js', 'lodash', '$state',
-      function (Domain, Page, Group, Photo, File, x2js, _) {
+    controller: ['Domain', 'Page', 'Group', 'Photo', 'File', 'x2js', 'lodash', 'Resources',
+      function (Domain, Page, Group, Photo, File, x2js, _, Resources) {
         const self = this;
 
         self.loadedFiles = [];
@@ -43,6 +43,7 @@ angular
           self.loadedFiles.splice(index, 1);
         };
 
+        //<editor-fold desc="exports">
         self.exportDomains = function () {
           saveAs(Domain.exportToXMLFile(), 'domains.xml');
         };
@@ -66,6 +67,7 @@ angular
         self.clearLocalStorage = function () {
           localStorage.clear();
         };
+        //</editor-fold>
 
         self.clearAppData = function() {
           localStorage.clear();
@@ -74,6 +76,10 @@ angular
           Group.clear();
           Photo.clear();
           File.clear();
+        }
+
+        self.saveFiles = function () {
+          Resources.saveFiles();
         }
       }]
   });

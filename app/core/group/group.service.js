@@ -29,6 +29,9 @@ angular
             resolve();
           });
         },
+        getJson() {
+          return groupsObj;
+        },
         save() {
           localStorage.setItem('groupsObject', JSON.stringify(groupsObj));
         },

@@ -33,6 +33,9 @@ angular
             resolve();
           });
         },
+        getJson() {
+          return pagesObj;
+        },
         list() {
           return pagesObj.pages.page;
         },

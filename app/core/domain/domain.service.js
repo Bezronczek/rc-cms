@@ -31,6 +31,9 @@ angular
             resolve();
           })
         },
+        getJson() {
+          return domainsObj;
+        },
         list() {
           return domainsObj.domains.domain;
         },

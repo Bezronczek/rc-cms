@@ -11,6 +11,8 @@
     "maxHeight": 90
   },
   "dataFolder": "D:\\Projekty\\Web\\rc-cms\\data",
+  "photosRoot" : "D:\\Projekty\\Web\\rc-cms\\data\\photos",
+  "xmlRoot": "D:\\Projekty\\Web\\rc-cms\\data",
   "gallery": {
     "minSquare": 200,
     "maxSquare": 240

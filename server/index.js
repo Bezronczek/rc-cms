@@ -3,9 +3,12 @@ const app = express();
 const getRawBody = require('raw-body');
 const {prepareFiles, deletePhotoFiles} = require('./utils');
 const config = require('./config.json');
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../app'));
 app.use(express.static(config.dataFolder));
+app.use('/resources', require('./xmlHandlers'));
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname + '/../app'});

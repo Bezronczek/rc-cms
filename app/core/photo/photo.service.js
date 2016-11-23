@@ -20,9 +20,6 @@ angular
       $interval(save, 60000);
 
       return {
-        save() {
-          localStorage.setItem('photosObject', JSON.stringify(photosObj));
-        },
         clear() {
           photosObj.photos.photo.length = 0;
         },
@@ -33,12 +30,17 @@ angular
             resolve();
           });
         },
+        getJson() {
+          return photosObj;
+        },
         getPhotosForGroup(groupName) {
           return _.filter(photosObj.photos.photo, {group: {_name: groupName}})
         },
         getNextId() {
           // if there's no photos, set initial ID to 1, otherwise get highest id in array and increase it by 1
-          const nextId = photosObj.photos.photo.length > 0 ? Math.max(...photosObj.photos.photo.map(o => +o._id)) + 1 : 1;
+          const nextId = photosObj.photos.photo.length > 0
+            ? Math.max(...photosObj.photos.photo.map(o => +o._id)) + 1
+            : 1;
 
           // reserve id for photo
           photosObj.photos.photo.push({

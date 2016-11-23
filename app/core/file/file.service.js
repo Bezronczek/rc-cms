@@ -32,7 +32,9 @@ angular
             localStorage.setItem('filesObject', JSON.stringify(filesObj));
             resolve();
           });
-
+        },
+        getJson() {
+          return filesObj;
         },
         getFileForPhoto(photo) {
           return _.find(filesObj.files.file, {_id: photo._id});

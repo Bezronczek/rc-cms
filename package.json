@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "bower": "*",
+    "flow-bin": "^0.35.0",
     "jasmine-core": "*",
     "karma": "*",
     "karma-chrome-launcher": "*",
