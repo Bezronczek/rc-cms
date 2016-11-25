@@ -7,8 +7,6 @@ angular
     templateUrl: 'photos-view/photos-view.template.html',
     controller: ['$state', 'dragularService', '$element',
       function ($state) {
-        console.log(this.groups);
-
         this.addGroup = function (name) {
           this.groups.push({
             _name: name,

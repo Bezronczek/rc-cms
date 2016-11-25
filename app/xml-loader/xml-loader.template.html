@@ -5,6 +5,7 @@
   <!--</div>-->
   <div class="row bot15">
     <button class="btn btn-primary form-control top15" ng-click="$ctrl.saveFiles()">Zapisz pliki</button>
+    <button class="btn btn-primary form-control top15" ng-click="$ctrl.loadFiles()">Wczytaj pliki</button>
   </div>
   <div class="row bot15">
     <button class="btn btn-primary form-control top15" ng-click="$ctrl.exportDomains()">Exportuj Domeny</button>
@@ -29,6 +30,9 @@
   <div class="row">
     <div uib-alert ng-repeat="fileName in $ctrl.loadedFiles" class="alert-success top15" close="$ctrl.closeAlert($index)">
       Wczytano plik {{fileName}}
+    </div>
+    <div uib-alert ng-if="$ctrl.loadComplete" class="alert-success top15">
+      Wczytano pliki z serwera
     </div>
   </div>
 </div>

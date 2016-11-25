@@ -2,10 +2,14 @@ const router = require('express').Router();
 const fs = require('fs-extra');
 const config = require('./config.json');
 const X2JS = require('x2js');
+const bodyParser = require('body-parser');
+
 const x2js = new X2JS({
   useDoubleQuotes: true,
   stripWhitespaces: false
 });
+
+router.use(bodyParser.json());
 
 router.post('/', function(req, res) {
   try {
@@ -18,6 +22,24 @@ router.post('/', function(req, res) {
     res.status(500).json(err.stack || err);
   }
 });
+
+router.get('/', function (req, res) {
+  const data = {};
+
+  fs.readdir(config.xmlRoot, (err, files) => {
+    const xmlFiles = files.filter(file => file.match(/\.xml$/));
+
+    for(const file of xmlFiles) {
+
+      const path = `${config.xmlRoot}\\${file}`;
+      const content = fs.readFileSync(path, 'utf8');
+      data[file.replace(/\.xml$/, "")] = x2js.xml2js(content);
+    }
+
+    res.status(200).json(data);
+  });
+});
+
 
 function saveXMLFiles({domains, pages, groups, photos, files}) {
   const domainsString = x2js.js2xml(domains);

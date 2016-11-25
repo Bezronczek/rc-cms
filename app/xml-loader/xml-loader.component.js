@@ -80,6 +80,11 @@ angular
 
         self.saveFiles = function () {
           Resources.saveFiles();
+        };
+
+        self.loadFiles = function () {
+          Resources.loadFiles()
+            .then(self.loadComplete = true);
         }
       }]
   });

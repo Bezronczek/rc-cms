@@ -3,13 +3,12 @@ const app = express();
 const getRawBody = require('raw-body');
 const {prepareFiles, deletePhotoFiles} = require('./utils');
 const config = require('./config.json');
-const bodyParser = require('body-parser');
+
 
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../app'));
-app.use(express.static(config.dataFolder));
+app.use(express.static(config.photosRoot));
 app.use('/resources', require('./xmlHandlers'));
 
 app.get('/', (req, res) => {

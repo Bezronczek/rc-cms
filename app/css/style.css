@@ -42,10 +42,10 @@ li.list-group-item.active > a {
 
 .thumb {
     margin-bottom: 30px;
-    max-height: 220px;
+    max-height: 200px;
     /*border-bottom: 0px;*/
     border-radius: 0;
-    /*padding: 0;*/
+    /*padding: 10px;*/
 }
 
 .photo-description {

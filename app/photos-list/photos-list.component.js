@@ -21,11 +21,6 @@ angular
           containersFilteredModel: self.filteredModel
         });
 
-        $scope.$on('dragulardrop', () => {
-          Photo.save();
-          File.save();
-        });
-
         self.getFilteredModel = function (filteredModel, items, filterQuery) {
           filteredModel.length = 0;
           [].push.apply(filteredModel, $filter('photo')(items, filterQuery));
@@ -45,10 +40,10 @@ angular
               data: file
             });
 
-            Upload.dataUrl(file)
-              .then(url => {
-                self.tmpFiles.push({id: nextId, data: url})
-              });
+            // Upload.dataUrl(file)
+            //   .then(url => {
+            //     self.tmpFiles.push({id: nextId, data: url})
+            //   });
 
             upload.then(resp => {
               const newPhoto = {
@@ -68,7 +63,7 @@ angular
                   return Photo.replaceTempPhoto(resp.data._id, newPhoto);
                 })
                 .then(() => {
-                  _.remove(self.tmpFiles, {id: resp.data._id});
+                  $scope.$apply();
                 });
             });
           }
