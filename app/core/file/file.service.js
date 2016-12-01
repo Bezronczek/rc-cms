@@ -1,7 +1,7 @@
 angular
   .module('core.file')
-  .factory('File', ['lodash', 'x2js', '$interval',
-    function (_, x2js, $interval) {
+  .factory('File', ['lodash', 'x2js', '$interval', '$q',
+    function (_, x2js, $interval, $q) {
 
       let filesObj = {
         files: {
@@ -55,14 +55,14 @@ angular
           return _.find(filesObj.files.file, {_id: photoId});
         },
         addFilesForPhoto(file) {
-          return new Promise(resolve => {
+          return $q(resolve => {
             filesObj.files.file.push(file);
             localStorage.setItem('filesObject', JSON.stringify(filesObj));
             resolve();
           });
         },
         delete(photo) {
-          return new Promise(resolve => {
+          return $q(resolve => {
             _.remove(filesObj.files.file, {id: photo._id});
             localStorage.setItem('filesObject', JSON.stringify(filesObj));
             resolve();

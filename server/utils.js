@@ -1,4 +1,4 @@
-// const sharp = require('sharp');
+const sharp = require('sharp');
 const sizeOf = require('image-size');
 const fs = require('fs');
 const jimp = require('jimp');
@@ -8,9 +8,9 @@ const config = require('./config.json');
 module.exports.deletePhotoFiles = function(id) {
   return new Promise((resolve, reject) => {
     try {
-      fs.unlinkSync(`${config.photosRoot}/max/${id}.jpg`);
-      fs.unlinkSync(`${config.photosRoot}/min/${id}.jpg`);
-      fs.unlinkSync(`${config.photosRoot}/preview/${id}.jpg`);
+      fs.unlinkSync(`${config.photosRoot}/photos/max/${id}.jpg`);
+      fs.unlinkSync(`${config.photosRoot}/photos/min/${id}.jpg`);
+      fs.unlinkSync(`${config.photosRoot}/photos/preview/${id}.jpg`);
       resolve();
     } catch (e) {
       reject(e.stack || e);
@@ -31,50 +31,50 @@ module.exports.prepareFiles = function (buffer, photoId) {
   const prevWidth = Math.floor(width * ratioPrev);
   const prevHeight = Math.floor(height * ratioPrev);
 
-  const maxPath = `/max/${photoId}.jpg`;
-  const minPath = `/min/${photoId}.jpg`;
-  const previewPath = `/preview/${photoId}.jpg`;
+  const maxPath = `/photos/max/${photoId}.jpg`;
+  const minPath = `/photos/min/${photoId}.jpg`;
+  const previewPath = `/photos/preview/${photoId}.jpg`;
 
   checkFolders();
 
 
-  resizeAndSave(buffer,  {width, height}, `${config.photosRoot}${maxPath}`);
+  // resizeAndSave(buffer,  {width, height}, `${config.photosRoot}${maxPath}`);
 
-  // sharp(buffer)
-  //   .toFile(`${config.photosRoot}${maxPath}`)
-  //   .catch(e => {
-  //     throw e
-  //   });
+  sharp(buffer)
+    .toFile(`${config.photosRoot}${maxPath}`)
+    .catch(e => {
+      throw e
+    });
 
   while(!fs.existsSync(config.photosRoot+maxPath)) {
 
   }
 
-  resizeAndSave(buffer, {width: minWidth, height: minHeight}, `${config.photosRoot}${minPath}`);
+  // resizeAndSave(buffer, {width: minWidth, height: minHeight}, `${config.photosRoot}${minPath}`);
 
-  // sharp(buffer)
-  //   .quality(95)
-  //   .resize(, )
-  //   .toFile(`${config.photosRoot}${minPath}`)
-  //   .catch(e => {
-  //     throw e
-  //   });
+  sharp(buffer)
+    .quality(95)
+    .resize(minWidth, minHeight)
+    .toFile(`${config.photosRoot}${minPath}`)
+    .catch(e => {
+      throw e
+    });
 
   while(!fs.existsSync(config.photosRoot+minPath)) {
 
   }
 
 
-  resizeAndSave(buffer, {width: prevWidth, height: prevHeight}, `${config.photosRoot}${previewPath}`);
+  // resizeAndSave(buffer, {width: prevWidth, height: prevHeight}, `${config.photosRoot}${previewPath}`);
 
 
-  // sharp(buffer)
-  //   .quality(95)
-  //   .resize(prevWidth, prevHeight)
-  //   .toFile(`${config.photosRoot}${previewPath}`)
-  //   .catch(e => {
-  //     throw e
-  //   });
+  sharp(buffer)
+    .quality(95)
+    .resize(prevWidth, prevHeight)
+    .toFile(`${config.photosRoot}${previewPath}`)
+    .catch(e => {
+      throw e
+    });
 
   while(!fs.existsSync(config.photosRoot+previewPath)) {
 
@@ -113,14 +113,14 @@ function resizeAndSave(buffer, {width, height}, targetPath) {
 
 function checkFolders() {
 
-  if(!fs.existsSync(`${config.photosRoot}/min`)) {
-    fs.mkdirSync(`${config.photosRoot}/min`);
+  if(!fs.existsSync(`${config.photosRoot}/photos/min`)) {
+    fs.mkdirSync(`${config.photosRoot}/photos/min`);
   }
-  if(!fs.existsSync(`${config.photosRoot}/max`)) {
-    fs.mkdirSync(`${config.photosRoot}/max`);
+  if(!fs.existsSync(`${config.photosRoot}/photos/max`)) {
+    fs.mkdirSync(`${config.photosRoot}/photos/max`);
   }
-  if(!fs.existsSync(`${config.photosRoot}/preview`)) {
-    fs.mkdirSync(`${config.photosRoot}/preview`);
+  if(!fs.existsSync(`${config.photosRoot}/photos/preview`)) {
+    fs.mkdirSync(`${config.photosRoot}/photos/preview`);
   }
 }
 

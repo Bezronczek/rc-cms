@@ -68,6 +68,7 @@ li.list-group-item.active > a {
 
 .photos-draggable {
     min-height: 300px;
+    padding-bottom: 200px;
 }
 
 .photos-draggable.dragover {

@@ -1,7 +1,7 @@
 <div class="photos-draggable row" ngf-drop ngf-select ng-model="$ctrl.files"
      ngf-dragover-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
      accept="image/*" ngf-pattern="image/*" ng-change="$ctrl.fileChange($ctrl.files)" ngf-select-disabled="true">
-  <div ng-repeat="photo in $ctrl.getFilteredModel($ctrl.filteredModel, $ctrl.photos, $ctrl.groupname)"
+  <div ng-repeat="photo in $ctrl.getFilteredModel($ctrl.filteredModel, $ctrl.photos, $ctrl.groupname) track by photo._id"
        class="col-lg-3 text-center center-block">
     <div ng-if="$ctrl.getMinFile(photo)" class="photo-wrapper">
       <img class="img-thumbnail thumb" ng-src="{{$ctrl.getMinFile(photo)._path}}"
@@ -11,6 +11,9 @@
             ng-click="$ctrl.removePhotoFromGroup(photo, $ctrl.groupname)"></span>
     </div>
 
+  </div>
+  <div ng-if="$ctrl.loading">
+    <p>Wczytuje</p>
   </div>
   <div ng-repeat="file in $ctrl.tmpFiles" class="col-lg-3">
     <img class="img-thumbnail thumb" ng-src="{{file.data}}">

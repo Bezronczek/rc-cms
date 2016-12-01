@@ -37,6 +37,7 @@ app.post('/getPhoto', (req, res) => {
       res.status(200).json(json);
     })
     .catch(err => {
+      console.error(err);
       res.status(500);
       res.end(err.message);
     });

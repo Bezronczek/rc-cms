@@ -13,7 +13,8 @@ angular
         self.tmpFiles = [];
         self.filteredModel = [];
         self.filteredPhotosCount = self.filteredModel.length;
-
+        self.loading = false;
+        // self.photosList = self.getFilteredModel(self.filteredModel, self.photos, self.groupname);
 
         dragularService($element.children(), {
           scope: $scope,
@@ -28,11 +29,10 @@ angular
           return filteredModel;
         };
 
-        self.photosList = self.getFilteredModel(self.filteredModel, self.photos, self.groupname);
-
         self.fileChange = function (files) {
 
           for (let file of files) {
+            self.loading = true;
             let nextId = Photo.getNextId();
 
             let upload = Upload.http({
@@ -63,7 +63,8 @@ angular
                   return Photo.replaceTempPhoto(resp.data._id, newPhoto);
                 })
                 .then(() => {
-                  $scope.$apply();
+                  self.loading = false;
+                  // $scope.$apply();
                 });
             });
           }
