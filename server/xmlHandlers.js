@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 
 const x2js = new X2JS({
   useDoubleQuotes: true,
-  stripWhitespaces: false
+  stripWhitespaces: false,
+  keepCData: true
 });
 
 router.use(bodyParser.json());
