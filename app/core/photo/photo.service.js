@@ -50,13 +50,26 @@ angular
 
           return nextId;
         },
-        replaceTempPhoto(photoId, photo) {
-          return new Promise(resolve => {
-            let index = _.findIndex(photosObj.photos.photo, {_id: photoId});
-            photosObj.photos.photo.splice(index, 1, photo);
-            localStorage.setItem('photosObject', JSON.stringify(photosObj));
-            resolve();
-          });
+        replaceTempPhoto(photoId, groupName) {
+
+          const newPhoto = {
+            _id: photoId,
+              group: {_name: groupName},
+            data: [{
+              _lang: 'pl',
+              _title: '',
+            },{
+              _lang: 'en',
+              _title: '',
+            }]
+          };
+
+          // return new Promise(resolve => {
+          let index = _.findIndex(photosObj.photos.photo, {_id: photoId});
+          photosObj.photos.photo.splice(index, 1, newPhoto);
+          localStorage.setItem('photosObject', JSON.stringify(photosObj));
+          //   resolve();
+          // });
         },
         newPhoto(photo) {
           return new Promise(resolve => {

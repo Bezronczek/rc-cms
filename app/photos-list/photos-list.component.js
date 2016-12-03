@@ -46,25 +46,15 @@ angular
             //   });
 
             upload.then(resp => {
-              const newPhoto = {
-                _id: resp.data._id,
-                group: {_name: self.groupname},
-                data: [{
-                  _lang: 'pl',
-                  _title: '',
-                },{
-                  _lang: 'pl',
-                  _title: '',
-                }]
-              };
+              // const newPhoto =
 
               File.addFilesForPhoto(resp.data)
                 .then(() => {
-                  return Photo.replaceTempPhoto(resp.data._id, newPhoto);
-                })
-                .then(() => {
+                  Photo.replaceTempPhoto(resp.data._id, self.groupname);
                   self.loading = false;
-                  // $scope.$apply();
+                })
+                .catch(e => {
+                  console.error(e);
                 });
             });
           }
